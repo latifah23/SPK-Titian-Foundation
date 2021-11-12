@@ -34,7 +34,9 @@
                                             <label id="">
                                                 <input type="text" name="id_kriteria[]" value="<?= $value->id_kriteria; ?>" hidden>
                                             </label>
-                                            <input type="text" name="nilai[]" value="">
+                                            <!-- <input type="text" name="nilai[]" value=""> -->
+                                            <input type="range" name="nilai[]" value="1" min="1" max="5" oninput="this.nextElementSibling.value = this.value">
+									<output>1</output>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

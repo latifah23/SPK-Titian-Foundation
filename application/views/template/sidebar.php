@@ -224,13 +224,19 @@
               <li>
                 <a class="nav-link" href="<?php echo base_url('admin/data_kriteria') ?>">
                   <i class="fas fa-th"></i>
-                  <span>Kriteria</span>
+                  <span>Data Kriteria</span>
                 </a>
               </li>
               <li>
                 <a class="nav-link" href="<?php echo base_url('admin/data_nilai') ?>">
                   <i class="fas fa-random"></i>
                   <span>Data Nilai</span>
+                </a>
+              </li>
+              <li>
+                <a class="nav-link" href="<?php echo base_url('admin/data_periode') ?>">
+                  <i class="fas fa-random"></i>
+                  <span>Data Periode</span>
                 </a>
               </li>
               <!-- <li>
