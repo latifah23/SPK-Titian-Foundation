@@ -7,6 +7,17 @@ class Data_periode extends CI_Controller
 		parent::__construct();
 	
 		if($this->session->userdata('status') != "login"){
+            $this->session->set_flashdata(
+                'pesan',
+                '<div class="alert alert-danger alert-dismissible show fade">
+                <div class="alert-body">
+                <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+                </button>
+                Login terlebih dahulu
+                </div>
+                </div>'
+            );
 			redirect(base_url("login"));
 		}
         else if ($this->session->userdata('akses')!= 'admin') {

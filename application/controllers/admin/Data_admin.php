@@ -6,6 +6,17 @@ class Data_admin extends CI_Controller
 		parent::__construct();
 	
 		if($this->session->userdata('status') != "login"){
+            $this->session->set_flashdata(
+                'pesan',
+                '<div class="alert alert-danger alert-dismissible show fade">
+                <div class="alert-body">
+                <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+                </button>
+                Login terlebih dahulu
+                </div>
+                </div>'
+            );
 			redirect(base_url("login"));
 		}
         else if ($this->session->userdata('akses')!= 'manajer') {
@@ -68,6 +79,17 @@ class Data_admin extends CI_Controller
         Data admin berhasil ditambahkan!
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>');
+            $this->session->set_flashdata(
+                'pesan',
+                '<div class="alert alert-success alert-dismissible show fade">
+                <div class="alert-body">
+                <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+                </button>
+                Data admin berhasil ditambahkan!
+                </div>
+                </div>'
+            );      
         redirect('admin/data_admin');
         }
     }
@@ -110,10 +132,15 @@ class Data_admin extends CI_Controller
         );
 
         $this->titian_model->update_data('admin', $data, $where);
-        $this->session->set_flashdata('pesan','<div class="alert alert-success alert-dismissible fade show" role="alert">
-        Data admin berhasil diupdate!
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>');
+        $this->session->set_flashdata('pesan',
+                '<div class="alert alert-success alert-dismissible show fade">
+                <div class="alert-body">
+                <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+                </button>
+                Data admin berhasil di Update!
+                </div>
+                </div>');
         redirect('admin/data_admin');
         }
     }
@@ -129,10 +156,17 @@ class Data_admin extends CI_Controller
     public function delete_admin($id){
         $where = array('id_admin' => $id);
         $this->titian_model->delete_data($where, 'admin');
-        $this->session->set_flashdata('pesan','<div class="alert alert-danger alert-dismissible fade show" role="alert">
-        Data admin berhasil dihapus!
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>');
+        $this->session->set_flashdata(
+            'pesan',
+            '<div class="alert alert-danger alert-dismissible show fade">
+                <div class="alert-body">
+                <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+                </button>
+                Data admin berhasil dihapus!
+                </div>
+                </div>'
+        );      
         redirect('admin/data_admin');
     }
 }

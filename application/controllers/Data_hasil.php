@@ -1,6 +1,25 @@
 <?php
 class Data_hasil extends CI_Controller {
-	
+
+    function __construct()
+    {
+        parent::__construct();
+
+        if ($this->session->userdata('status') != "login") {
+            $this->session->set_flashdata(
+                'pesan',
+                '<div class="alert alert-danger alert-dismissible show fade">
+                <div class="alert-body">
+                <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+                </button>
+                Login terlebih dahulu
+                </div>
+                </div>'
+            );
+            redirect(base_url("login"));
+        }
+    }    
     public function index()
     {
        $data['hasil'] = $this->titian_model->get_data('hasil')->result();      
@@ -38,7 +57,3 @@ class Data_hasil extends CI_Controller {
     
     
 }
-
-
-?>
-

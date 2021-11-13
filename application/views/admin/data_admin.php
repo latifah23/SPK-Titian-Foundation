@@ -14,7 +14,7 @@
                     <th>No</th>
                     <th>Nama Admin</th>
                     <th>Username</th>
-                    <th>Password</th>
+                    <!-- <th>Password</th> -->
                     <th>Status</th>
                     <th>Aksi</th>
                 </tr>
@@ -27,7 +27,7 @@
                     <td><?php echo $no++ ?></td>
                     <td><?php echo $ad->nama ?></td>
                     <td><?php echo $ad->username?></td>
-                    <td><?php echo $ad->password ?></td>
+                    <!-- <td><?php echo $ad->password ?></td> -->
                     <td><?php 
                     if ($ad->status == "0") {
                         echo "<span class= 'badge badge-danger'>Tidak Aktif</span>";

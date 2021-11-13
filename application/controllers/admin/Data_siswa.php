@@ -7,6 +7,17 @@ class Data_siswa extends CI_Controller
 		parent::__construct();
 	
 		if($this->session->userdata('status') != "login"){
+            $this->session->set_flashdata(
+                'pesan',
+                '<div class="alert alert-danger alert-dismissible show fade">
+                <div class="alert-body">
+                <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+                </button>
+                Login terlebih dahulu
+                </div>
+                </div>'
+            );
 			redirect(base_url("login"));
 		}
         else if ($this->session->userdata('akses')!= 'admin') {
@@ -71,10 +82,17 @@ class Data_siswa extends CI_Controller
         );
     
         $this->titian_model->insert_data($data,'siswa');
-        $this->session->set_flashdata('pesan','<div class="alert alert-success alert-dismissible fade show" role="alert">
-        Data siswa berhasil ditambahkan!
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>');
+        $this->session->set_flashdata(
+                'pesan',
+                '<div class="alert alert-success alert-dismissible show fade">
+                <div class="alert-body">
+                <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+                </button>
+                Data Siswa berhasil di Tambahkan!
+                </div>
+                </div>'
+        );
         redirect('admin/data_siswa');
         }
     }
@@ -115,10 +133,17 @@ class Data_siswa extends CI_Controller
         );
 
         $this->titian_model->update_data('siswa', $data, $where);
-        $this->session->set_flashdata('pesan','<div class="alert alert-success alert-dismissible fade show" role="alert">
-        Data siswa berhasil diupdate!
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>');
+            $this->session->set_flashdata(
+                'pesan',
+                '<div class="alert alert-success alert-dismissible show fade">
+                <div class="alert-body">
+                <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+                </button>
+                Data Siswa berhasil di Update!
+                </div>
+                </div>'
+            );
         redirect('admin/data_siswa');
         }
     }
@@ -134,10 +159,17 @@ class Data_siswa extends CI_Controller
     public function delete_siswa($id){
         $where = array('id_siswa' => $id);
         $this->titian_model->delete_data($where, 'siswa');
-        $this->session->set_flashdata('pesan','<div class="alert alert-danger alert-dismissible fade show" role="alert">
-        Data siswa berhasil dihapus!
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>');
+        $this->session->set_flashdata(
+            'pesan',
+            '<div class="alert alert-danger alert-dismissible show fade">
+                <div class="alert-body">
+                <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+                </button>
+                Data Siswa berhasil di Hapus!
+                </div>
+                </div>'
+        );
         redirect('admin/data_siswa');
     }
 }

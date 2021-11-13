@@ -121,16 +121,28 @@ class Titian_model extends CI_model
     return $this->db->get('rangking')->result(); // Tampilkan data rangking sesuai bulan dan tahun yang diinput oleh user pada filter
   }
 
+  // public function view_by_year($year)
+  // {
+  //   $this->db->where('YEAR(tanggal)', $year); // Tambahkan where tahun
+
+  //   return $this->db->get('rangking')->result(); // Tampilkan data rangking sesuai tahun yang diinput oleh user pada filter
+  // }
   public function view_by_year($year)
   {
-    $this->db->where('YEAR(tanggal)', $year); // Tambahkan where tahun
+    $this->db->select('*, siswa.nama as nama_siswa');
+    $this->db->from('rangking');
+    $this->db->join('siswa', 'siswa.id_siswa = rangking.id_siswa');
+    $this->db->where('siswa.periode', $year); // Tambahkan where tahun
 
-    return $this->db->get('rangking')->result(); // Tampilkan data rangking sesuai tahun yang diinput oleh user pada filter
+    return $this->db->get(); // Tampilkan data rangking sesuai tahun yang diinput oleh user pada filter
   }
 
   public function view_all()
   {
-    return $this->db->get('rangking')->result(); // Tampilkan semua data rangking
+    $this->db->select('*, siswa.nama as nama_siswa');
+    $this->db->from('rangking');
+    $this->db->join('siswa', 'siswa.id_siswa = rangking.id_siswa');
+    return $this->db->get()->result(); // Tampilkan semua data rangking
   }
 
   public function option_tahun()

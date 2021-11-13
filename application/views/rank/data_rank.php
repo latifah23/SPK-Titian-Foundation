@@ -223,6 +223,7 @@
                     <th>Rangking</th>
                     <th>Nama Siswa</th>
                     <th>Asal Sekolah</th>
+                    <th>Periode</th>
                     <th>Nilai</th>
                 </tr>
             </thead>
@@ -246,6 +247,9 @@
                             </td>
                             <td>
                                 <?php echo $ss->asal_sekolah; ?>
+                            </td>
+                            <td>
+                                <?php echo $ss->periode; ?>
                             </td>
                         <?php } ?>
                         <td>
