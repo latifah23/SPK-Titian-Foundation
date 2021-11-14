@@ -16,7 +16,7 @@
                         </div>
                         <div class="form-group">
                             <label>Tahun</label>
-                            <input type="date" name="tahun" class="form-control">
+                            <input type="number" name="tahun" class="form-control">
                             <?php echo form_error('tahun','<div class="text-small text-danger">','</div>')?>
                         </div>
                            <button type="submit" class="btn btn-primary mt-3">Simpan</button>

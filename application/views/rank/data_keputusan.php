@@ -65,7 +65,8 @@
                 <button type="submit" class="btn btn-success mt-3">Simpan <i class="fas fa-save"></i></button>
             </form>
         </div>
-        <hr>
+        <!-- Filter -->
+        <!-- <hr>
         <form method="get" action="">
             <label>Filter Berdasarkan</label><br>
             <select name="filter" id="filter">
@@ -119,9 +120,29 @@
             <a href="<?php echo base_url('admin/data_rangking/keputusan'); ?>" class="btn btn-info mt-3">Reset Filter</a>
             <a href="<?php echo $url_cetak; ?>" class="btn btn-danger mt-3" target="_blank">Print PDF <i class="fas fa-print"></i></a>
         </form>
-        <hr />
+        <hr /> -->
+        <hr>
+        <form method="GET" action="">
+            <label>Filter Berdasarkan</label><br>
 
-        <b><?php echo $ket; ?></b><br /><br />
+            <div id="form-tahun">
+                <select name="tahun">
+                    <?php
+                    foreach ($option_tahun as $data) { // Ambil data tahun dari model yang dikirim dari controller
+                        echo '<option value="' . $data->tahun . '">' . $data->tahun . '</option>';
+                    }
+                    ?>
+                </select>
+                <br /><br />
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Tampilkan</button>
+            <a href="<?php echo base_url('admin/data_rangking/keputusan'); ?>" class="btn btn-info mt-3">Reset Filter</a>
+            <a href="<?php echo $url_cetak; ?>" class="btn btn-danger mt-3" target="_blank">Print PDF <i class="fas fa-print"></i></a>
+        </form>
+        <hr />
+        <!-- End Filter -->
+        <!-- <b><?php echo $ket; ?></b> -->
         <form action="<?php echo base_url('admin/data_rangking/update') ?>" method="POST" enctype="multipart/form-data">
             <table class="table table-hover table-striped table-bordered">
                 <thead>
@@ -175,47 +196,6 @@
                     </tr>
                 </tbody>
         </form>
-        <?php
-        // if (!empty($transaksi)) {
-        //     $no = 1;
-        //     foreach ($transaksi as $data) {
-        //         $tgl = date('d-m-Y', strtotime($data->tanggal));
-        //         echo "<tr>";
-        //         echo "<td>" . $tgl . "</td>";
-        //         echo "<td>" . $data->rangking . "</td>";
-        //         echo "<td>" . $data->nama_siswa . "</td>";
-        //         echo "<td>" . $data->nilai . "</td>";
-        //         echo "<td>" . $data->keputusan . "</td>";
-        //         echo "</tr>";
-        //         $no++;
-        //     }
-        // }
-        ?>
-        <script src="<?php echo base_url('assets/assets/js/jquery-ui/jquery-ui.min.js'); ?>"></script> <!-- Load file plugin js jquery-ui -->
-        <script>
-            $(document).ready(function() { // Ketika halaman selesai di load
-                $('.input-tanggal').datepicker({
-                    dateFormat: 'yy-mm-dd' // Set format tanggalnya jadi yyyy-mm-dd
-                });
-
-                $('#form-tanggal, #form-bulan, #form-tahun').hide(); // Sebagai default kita sembunyikan form filter tanggal, bulan & tahunnya
-
-                $('#filter').change(function() { // Ketika user memilih filter
-                    if ($(this).val() == '1') { // Jika filter nya 1 (per tanggal)
-                        $('#form-bulan, #form-tahun').hide(); // Sembunyikan form bulan dan tahun
-                        $('#form-tanggal').show(); // Tampilkan form tanggal
-                    } else if ($(this).val() == '2') { // Jika filter nya 2 (per bulan)
-                        $('#form-tanggal').hide(); // Sembunyikan form tanggal
-                        $('#form-bulan, #form-tahun').show(); // Tampilkan form bulan dan tahun
-                    } else { // Jika filternya 3 (per tahun)
-                        $('#form-tanggal, #form-bulan').hide(); // Sembunyikan form tanggal dan bulan
-                        $('#form-tahun').show(); // Tampilkan form tahun
-                    }
-
-                    $('#form-tanggal input, #form-bulan select, #form-tahun select').val(''); // Clear data pada textbox tanggal, combobox bulan & tahun
-                })
-            })
-        </script>
         </table>
     </section>
 </div>

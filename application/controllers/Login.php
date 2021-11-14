@@ -40,7 +40,19 @@ class Login extends CI_Controller
 
 				redirect(base_url("admin/dashboard"));
 			} else {
-				echo "Username dan password salah !";
+				// echo "Username dan password salah !";
+				$this->session->set_flashdata(
+					'pesan',
+					'<div class="alert alert-warning alert-dismissible show fade">
+                <div class="alert-body">
+                <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+                </button>
+                Username dan password salah !
+                </div>
+                </div>'
+				);
+				redirect(base_url('login'));
 			}
 		} elseif ($level == 'manajer') {
 			if ($cek > 0) {
@@ -55,7 +67,19 @@ class Login extends CI_Controller
 
 				redirect(base_url("admin/dashboard"));
 			} else {
-				echo "Username dan password salah !";
+				// echo "Username dan password salah !";
+				$this->session->set_flashdata(
+					'pesan',
+					'<div class="alert alert-warning alert-dismissible show fade">
+                <div class="alert-body">
+                <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+                </button>
+                Username dan password salah !
+                </div>
+                </div>'
+				);
+				redirect(base_url('login'));
 			}
 		}
 	}
@@ -63,6 +87,17 @@ class Login extends CI_Controller
 	function logout()
 	{
 		$this->session->sess_destroy();
+		$this->session->set_flashdata(
+			'pesan',
+			'<div class="alert alert-primary alert-dismissible show fade">
+                <div class="alert-body">
+                <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+                </button>
+                Berhasil Logout
+                </div>
+                </div>'
+		);
 		redirect(base_url('login'));
 	}
 }

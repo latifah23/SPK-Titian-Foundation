@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-body">
                 <?php foreach ($periode as $pr) : ?>
-                <form method="POST" action="<?php echo base_url('admin/data_periode$periode/update_periode_aksi')?>"enctype="multipart/form-data">
+                <form method="POST" action="<?php echo base_url('admin/data_periode/update_periode_aksi')?>"enctype="multipart/form-data">
                 <div class="class row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -22,7 +22,7 @@
                         </div>
                         <div class="form-group">
                             <label>Tahun</label>
-                            <input type="text" name="tahun" class="form-control" value="<?php echo $pr->tahun?>">
+                            <input type="number" name="tahun" class="form-control" value="<?php echo $pr->tahun?>">
                             <?php echo form_error('tahun','<div class="text-small text-danger">','</div>')?>
                         </div>
                         <button type="submit" class="btn btn-primary mt-3">Simpan</button>
