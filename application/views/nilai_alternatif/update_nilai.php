@@ -1,15 +1,15 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Update Data Siswa</h1>
+            <h1>Tambah Nilai</h1>
         </div>
-
         <div class="card">
             <div class="card-body">
-                <?php foreach ($siswa as $sw) : ?>
-                    <form method="POST" action="<?php echo base_url('admin/data_siswa/update_siswa_aksi') ?>" enctype="multipart/form-data">
-                        <div class="class row">
-                            <div class="col-md-6">
+                <?php echo $this->session->flashdata('pesan') ?>
+                <form method="POST" action="<?php echo base_url('admin/data_nilai_alternatif/update_nilai_aksi') ?>" enctype="multipart/form-data">
+                    <div class="class row">
+                        <div class="col-md-6">
+                            <?php foreach ($siswa as $sw) : ?>
                                 <div class="form-group">
                                     <label>Kode</label>
                                     <input type="text" name="id_siswa" class="form-control" value="<?= $sw->id_siswa ?>" readonly>
@@ -42,12 +42,30 @@
                                     </select>
                                     <?php echo form_error('id_periode', '<div class="text-small text-danger">', '</div>') ?>
                                 </div>
-                                <button type="submit" class="btn btn-primary mt-3">Simpan</button>
-                                <button type="reset" class="btn btn-danger mt-3">Reset</button>
-                            </div>
+                            <?php endforeach; ?>
+                            <table>
+                                <tr>
+                                    <th>Nama Kriteria</th>
+                                    <th>Nilai</th>
+                                </tr>
+                                <?php foreach ($kriteria as $key => $value) : ?>
+                                    <tr>
+                                        <td><?php echo $value->nama_kriteria ?></td>
+                                        <td>
+                                            <label id="">
+                                                <input type="text" name="id_kriteria[]" value="<?= $value->id_kriteria; ?>" hidden>
+                                            </label>
+                                            <input type="hidden" name="id_nilai[]" value="<?php echo $nilai[$key]->id_nilai ?>">
+                                            <input type="text" name="nilai[]" value="<?php echo $nilai[$key]->nilai ?>">
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </table>
+                            <button type="submit" class="btn btn-primary mt-3">Simpan</button>
+                            <button type="reset" class="btn btn-danger mt-3">Reset</button>
                         </div>
-                    </form>
-                <?php endforeach; ?>
+                    </div>
+                </form>
             </div>
         </div>
     </section>
