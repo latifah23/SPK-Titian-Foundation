@@ -249,7 +249,13 @@
                                 <?php echo $ss->asal_sekolah; ?>
                             </td>
                             <td>
-                                <?php echo $ss->periode; ?>
+                                <?php
+                                $where = array('id_periode ' => $ss->id_periode);
+                                $periode  = $this->titian_model->get_where_data($where, 'periode')->result();
+                                foreach ($periode as $p) {
+                                    echo $p->tahun;
+                                }
+                                ?>
                             </td>
                         <?php } ?>
                         <td>

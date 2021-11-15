@@ -215,22 +215,28 @@
                 <span>Data Admin</span>
               </a>
             </li> -->
-              <li>
+              <!-- <li>
                 <a class="nav-link" href="<?php echo base_url('admin/data_siswa') ?>">
                   <i class="fas fa-users"></i>
                   <span>Data Siswa</span>
                 </a>
-              </li>
+              </li> -->
               <li>
                 <a class="nav-link" href="<?php echo base_url('admin/data_kriteria') ?>">
                   <i class="fas fa-th"></i>
                   <span>Data Kriteria</span>
                 </a>
               </li>
-              <li>
+              <!-- <li>
                 <a class="nav-link" href="<?php echo base_url('admin/data_nilai') ?>">
                   <i class="fas fa-random"></i>
                   <span>Data Nilai</span>
+                </a>
+              </li> -->
+              <li>
+                <a class="nav-link" href="<?php echo base_url('admin/data_nilai_alternatif') ?>">
+                  <i class="fas fa-users"></i>
+                  <span>Data Nilai Alternatif</span>
                 </a>
               </li>
               <li>
@@ -256,11 +262,11 @@
                 </a>
               </li>
               <li>
-              <a class="nav-link" href="<?php echo base_url('admin/data_admin') ?>">
-                <i class="fas fa-user"></i>
-                <span>Data Admin</span>
-              </a>
-            </li>
+                <a class="nav-link" href="<?php echo base_url('admin/data_admin') ?>">
+                  <i class="fas fa-user"></i>
+                  <span>Data Admin</span>
+                </a>
+              </li>
               <!-- <li>
                 <a class="nav-link" href="<?php echo base_url('admin/data_siswa') ?>">
                   <i class="fas fa-users"></i>
@@ -280,11 +286,11 @@
                 </a>
               </li> -->
               <li>
-              <a class="nav-link" href="<?php echo base_url('admin/data_rangking') ?>">
-                <i class="fas fa-clipboard-list"></i>
-                <span>Data Rangking</span>
-              </a>
-            </li>
+                <a class="nav-link" href="<?php echo base_url('admin/data_rangking') ?>">
+                  <i class="fas fa-clipboard-list"></i>
+                  <span>Data Rangking</span>
+                </a>
+              </li>
             </ul>
           <?php } ?>
         </aside>
