@@ -33,6 +33,7 @@
                                     <select name="level" id="" class="form-control" tabindex="3">
                                         <option value="manajer">Manajer</option>
                                         <option value="admin">Admin</option>
+                                        <option value="superadmin">Superadmin</option>
                                     </select>
                                 </div>
 

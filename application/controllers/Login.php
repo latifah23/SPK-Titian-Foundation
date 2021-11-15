@@ -82,6 +82,34 @@ class Login extends CI_Controller
 				redirect(base_url('login'));
 			}
 		}
+		elseif ($level == 'superadmin') {
+			if ($cek > 0) {
+
+				$data_session = array(
+					'nama' => $username,
+					'status' => "login",
+					'akses' => "superadmin"
+				);
+
+				$this->session->set_userdata($data_session);
+
+				redirect(base_url("admin/dashboard"));
+			} else {
+				// echo "Username dan password salah !";
+				$this->session->set_flashdata(
+					'pesan',
+					'<div class="alert alert-warning alert-dismissible show fade">
+                <div class="alert-body">
+                <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+                </button>
+                Username dan password salah !
+                </div>
+                </div>'
+				);
+				redirect(base_url('login'));
+			}
+		}
 	}
 
 	function logout()
