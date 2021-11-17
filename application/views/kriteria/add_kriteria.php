@@ -17,8 +17,11 @@
                         </div>
                         <div class="form-group">
                             <label>Atribut</label>
-                            <input type="text" name="atribut" class="form-control">
                             <?php echo form_error('atribut','<div class="text-small text-danger">','</div>')?>
+                            <select class="form-control">
+                                        <option value="<?php echo "Benefit" ?>">Benefit</option>
+                                        <option value="<?php echo "Cost" ?>">Cost</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label>Bobot</label>
