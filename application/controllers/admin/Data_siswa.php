@@ -20,7 +20,7 @@ class Data_siswa extends CI_Controller
             );
 			redirect(base_url("login"));
 		}
-        else if ($this->session->userdata('akses')!= 'admin') {
+        else if ($this->session->userdata('akses') !='admin' && $this->session->userdata('akses')!='superadmin'){
             $this->session->set_flashdata(
                 'pesan',
                 '<div class="alert alert-warning alert-dismissible show fade">

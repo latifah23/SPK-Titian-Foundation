@@ -21,21 +21,7 @@ class Data_rangking extends CI_Controller
             );
             redirect(base_url("login"));
         } 
-        else if ($this->session->userdata('akses') != 'manajer') {
-            $this->session->set_flashdata(
-                'pesan',
-                '<div class="alert alert-warning alert-dismissible show fade">
-                <div class="alert-body">
-                <button class="close" data-dismiss="alert">
-                <span>&times;</span>
-                </button>
-                Anda tidak bisa akses halaman ini!!!
-                </div>
-                </div>'
-            );
-            redirect(base_url('login'));
-        }
-        else if ($this->session->userdata('akses') != 'superadmin') {
+        else if ($this->session->userdata('akses') !='manajer' && $this->session->userdata('akses')!='superadmin'){
             $this->session->set_flashdata(
                 'pesan',
                 '<div class="alert alert-warning alert-dismissible show fade">
@@ -137,8 +123,13 @@ class Data_rangking extends CI_Controller
                 $tahun = $_GET['tahun'];
 
                 $ket = 'Data Tahun ' . $tahun;
-                $transaksi = $this->titian_model->view_by_year($tahun); // Panggil fungsi view_by_year yang ada di titian_model
-            }
+                $transaksi = $this->titian_model->view_by_year($tahun)->result(); // Panggil fungsi view_by_year yang ada di titian_model
+            }else { 
+                // Jika user tidak mengklik tombol tampilkan
+                    $ket = 'Semua Data';
+                    $url_cetak = 'admin/data_rangking/cetak';
+                    $transaksi = $this->titian_model->view_all(); // Panggil fungsi view_all yang ada di titian_model
+                }
         // } else { // Jika user tidak mengklik tombol tampilkan
         //     $ket = 'Semua Data';
         //     $transaksi = $this->titian_model->view_all(); // Panggil fungsi view_all yang ada di titian_model
@@ -155,7 +146,7 @@ class Data_rangking extends CI_Controller
         foreach ($id_rank as $key => $value) {
             $data = array(
                 "rangking"          => $id_rank[$key],
-                "nama_siswa"        => $_POST['id_siswa'][$key],
+                "id_siswa"          => $_POST['id_siswa'][$key],
                 "nilai"             => $_POST['nilai'][$key],
                 "keputusan"         => $_POST['keputusan'][$key],
                 'tanggal'           => date('Y-m-d H:i:s'),

@@ -234,7 +234,7 @@
                 </a>
               </li>
               <li>
-                <a class="nav-link" href="<?php echo base_url('admin/nilai_alternatif') ?>">
+                <a class="nav-link" href="<?php echo base_url('admin/data_nilai_alternatif') ?>">
                   <i class="fas fa-random"></i>
                   <span>Data Nilai Alternatif</span>
                 </a>
@@ -320,7 +320,7 @@
                 </a>
               </li>
               <li>
-                <a class="nav-link" href="<?php echo base_url('admin/nilai_alternatif') ?>">
+                <a class="nav-link" href="<?php echo base_url('admin/data_nilai_alternatif') ?>">
                   <i class="fas fa-random"></i>
                   <span>Data Nilai Alternatif</span>
                 </a>

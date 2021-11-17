@@ -17,7 +17,7 @@
                         </div>
                         <div class="form-group">
                             <label>Nama Kriteria</label>
-                            <input type="text" name="kriteria" class="form-control" value="<?php echo $ad->nama_kriteria?>">
+                            <input type="text" name="nama_kriteria" class="form-control" value="<?php echo $ad->nama_kriteria?>">
                             <?php echo form_error('kriteria','<div class="text-small text-danger">','</div>')?>
                         </div>
                         <div class="form-group">

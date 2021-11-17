@@ -41,7 +41,7 @@
                                         <?php echo $ss->asal_sekolah; ?>
                                     </td>
                                 <?php } ?>
-                                <input type="text" name="id_siswa[]" value="<?php echo $ss->nama; ?>" hidden>
+                                <input type="text" name="id_siswa[]" value="<?php echo $ss->id_siswa; ?>" hidden>
                                 <td>
                                     <?= number_format($value, 2) ?>
                                     <input type="text" name="nilai[]" value="<?php echo number_format($value, 2) ?>" hidden>
@@ -129,7 +129,7 @@
                 <select name="tahun">
                     <?php
                     foreach ($option_tahun as $data) { // Ambil data tahun dari model yang dikirim dari controller
-                        echo '<option value="' . $data->tahun . '">' . $data->tahun . '</option>';
+                        echo '<option value="' . $data->id_periode . '">' . $data->tahun . '</option>';
                     }
                     ?>
                 </select>

@@ -19,8 +19,8 @@ class Data_admin extends CI_Controller
             );
 			redirect(base_url("login"));
 		}
-        else if ($this->session->userdata('akses')!= 'manajer') {
-            $this->session->set_flashdata(
+        else if ($this->session->userdata('akses') !='manajer' && $this->session->userdata('akses')!='superadmin'){
+        $this->session->set_flashdata(
                 'pesan',
                 '<div class="alert alert-warning alert-dismissible show fade">
                 <div class="alert-body">
@@ -33,22 +33,7 @@ class Data_admin extends CI_Controller
             ); redirect(base_url('login'));
             
         }
-        else if ($this->session->userdata('akses')!= 'superadmin') {
-            $this->session->set_flashdata(
-                'pesan',
-                '<div class="alert alert-warning alert-dismissible show fade">
-                <div class="alert-body">
-                <button class="close" data-dismiss="alert">
-                <span>&times;</span>
-                </button>
-                Anda tidak bisa akses halaman ini!!!
-                </div>
-                </div>'
-            ); redirect(base_url('login'));
-            
-        }
-
-	}
+    }
  
 
     public function index()

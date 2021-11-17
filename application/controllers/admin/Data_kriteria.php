@@ -19,21 +19,7 @@ class Data_kriteria extends CI_Controller
             );
 			redirect(base_url("login"));
 		}
-        else if ($this->session->userdata('akses')!= 'admin') {
-            $this->session->set_flashdata(
-                'pesan',
-                '<div class="alert alert-warning alert-dismissible show fade">
-                <div class="alert-body">
-                <button class="close" data-dismiss="alert">
-                <span>&times;</span>
-                </button>
-                Anda tidak bisa akses halaman ini!!!
-                </div>
-                </div>'
-            ); redirect(base_url('login'));
-            
-        }
-        else if ($this->session->userdata('akses')!= 'superadmin') {
+        else if ($this->session->userdata('akses') !='admin' && $this->session->userdata('akses')!='superadmin'){
             $this->session->set_flashdata(
                 'pesan',
                 '<div class="alert alert-warning alert-dismissible show fade">
@@ -130,11 +116,11 @@ class Data_kriteria extends CI_Controller
         $this->_rules();
         $id             = $this->input->post('id_kriteria');
         
-        if($this->form_validation->run() == FALSE)
-        {
-            redirect(site_url('update_kriteria'.$id));
+        // if($this->form_validation->run() == FALSE)
+        // {
+        //     redirect(site_url('update_kriteria'.$id));
             
-        }else{
+        // }else{
             $id_kriteria        = $this->input->post('id_kriteria');
             $nama_kriteria      = $this->input->post('nama_kriteria');
             $atribut            = $this->input->post('atribut');
@@ -158,7 +144,7 @@ class Data_kriteria extends CI_Controller
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>');
         redirect('admin/data_kriteria');
-        }
+        // }
     }
 
     public function _rules()

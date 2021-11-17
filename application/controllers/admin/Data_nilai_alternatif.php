@@ -20,21 +20,7 @@ class Data_nilai_alternatif extends CI_Controller
             );
             redirect(base_url("login"));
         } 
-        else if ($this->session->userdata('akses') != 'admin') {
-            $this->session->set_flashdata(
-                'pesan',
-                '<div class="alert alert-warning alert-dismissible show fade">
-                <div class="alert-body">
-                <button class="close" data-dismiss="alert">
-                <span>&times;</span>
-                </button>
-                Anda tidak bisa akses halaman ini!!!
-                </div>
-                </div>'
-            );
-            redirect(base_url('login'));
-        }
-        else if ($this->session->userdata('akses') != 'superadmin') {
+        else if ($this->session->userdata('akses') !='admin' && $this->session->userdata('akses')!='superadmin'){
             $this->session->set_flashdata(
                 'pesan',
                 '<div class="alert alert-warning alert-dismissible show fade">
@@ -174,16 +160,16 @@ class Data_nilai_alternatif extends CI_Controller
         // }
     }
 
-    // public function delete_nilai($id)
-    // {
-    //     $where = array('id_siswa' => $id);
-    //     $this->titian_model->delete_data($where, 'nilai_alternatif');
-    //     $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    //     Data nilai berhasil dihapus!
-    //     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    //     </div>');
-    //     redirect('admin/data_nilai_alternatif');
-    // }
+    public function delete_nilai($id)
+    {
+        $where = array('id_siswa' => $id);
+        $this->titian_model->delete_data($where, 'siswa');
+        $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        Data nilai berhasil dihapus!
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>');
+        redirect('admin/data_nilai_alternatif');
+    }
 
     public function _rules()
     {
