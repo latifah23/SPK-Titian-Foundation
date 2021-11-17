@@ -25,7 +25,7 @@
 </head>
 
 <body>
-    <b><?php echo $ket; ?></b><br /><br />
+    <b><?php echo $ket; ?></b>
 
     <table border="1" cellpadding="8">
         <tr>

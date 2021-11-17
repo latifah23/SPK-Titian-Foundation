@@ -43,7 +43,7 @@
                                     <?php echo form_error('id_periode', '<div class="text-small text-danger">', '</div>') ?>
                                 </div>
                             <?php endforeach; ?>
-                            <table>
+                            <table class="table table-hover table-striped table-bordered">
                                 <tr>
                                     <th>Nama Kriteria</th>
                                     <th>Nilai</th>
@@ -56,7 +56,9 @@
                                                 <input type="text" name="id_kriteria[]" value="<?= $value->id_kriteria; ?>" hidden>
                                             </label>
                                             <input type="hidden" name="id_nilai[]" value="<?php echo $nilai[$key]->id_nilai ?>">
-                                            <input type="text" name="nilai[]" value="<?php echo $nilai[$key]->nilai ?>">
+                                            <input type="range" name="nilai[]" value="<?php echo $nilai[$key]->nilai ?>" min="1" max="<?php echo $value->bobot ?>" oninput="this.nextElementSibling.value = this.value" step=".1">
+                                            <output><?php echo $nilai[$key]->nilai ?></output>
+
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

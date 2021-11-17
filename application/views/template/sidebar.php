@@ -215,12 +215,12 @@
                 <span>Data Admin</span>
               </a>
             </li> -->
-              <li>
+              <!-- <li>
                 <a class="nav-link" href="<?php echo base_url('admin/data_siswa') ?>">
                   <i class="fas fa-users"></i>
                   <span>Data Siswa</span>
                 </a>
-              </li>
+              </li> -->
               <li>
                 <a class="nav-link" href="<?php echo base_url('admin/data_kriteria') ?>">
                   <i class="fas fa-th"></i>
@@ -236,7 +236,7 @@
               <li>
                 <a class="nav-link" href="<?php echo base_url('admin/data_nilai_alternatif') ?>">
                   <i class="fas fa-random"></i>
-                  <span>Data Nilai Alternatif</span>
+                  <span>Data Nilai Siswa</span>
                 </a>
               </li>
               <!-- <li>
@@ -256,11 +256,11 @@
                 </a>
               </li>
               <li>
-              <a class="nav-link" href="<?php echo base_url('admin/data_admin') ?>">
-                <i class="fas fa-user"></i>
-                <span>Data Admin</span>
-              </a>
-            </li>
+                <a class="nav-link" href="<?php echo base_url('admin/data_admin') ?>">
+                  <i class="fas fa-user"></i>
+                  <span>Data Admin</span>
+                </a>
+              </li>
               <!-- <li>
                 <a class="nav-link" href="<?php echo base_url('admin/data_siswa') ?>">
                   <i class="fas fa-users"></i>
@@ -276,15 +276,21 @@
               <!-- <li>
                 <a class="nav-link" href="<?php echo base_url('admin/data_nilai') ?>">
                   <i class="fas fa-random"></i>
-                  <span>Data Nilai</span>
+                  <span>Data Nilai Siswa</span>
                 </a>
               </li> -->
               <li>
-              <a class="nav-link" href="<?php echo base_url('admin/data_rangking') ?>">
-                <i class="fas fa-clipboard-list"></i>
-                <span>Data Rangking</span>
-              </a>
-            </li>
+                <a class="nav-link" href="<?php echo base_url('admin/data_rangking') ?>">
+                  <i class="fas fa-clipboard-list"></i>
+                  <span>Data Rangking</span>
+                </a>
+              </li>
+              <li>
+                <a class="nav-link" href="<?php echo base_url('admin/data_rangking/keputusan/'); ?>">
+                  <i class="fas fa-clipboard-list"></i>
+                  <span>Data Keputusan</span>
+                </a>
+              </li>
             </ul>
           <?php } ?>
           <?php if ($this->session->userdata('akses') == 'superadmin') { ?>
@@ -296,17 +302,17 @@
                 </a>
               </li>
               <li>
-              <a class="nav-link" href="<?php echo base_url('admin/data_admin') ?>">
-                <i class="fas fa-user"></i>
-                <span>Data Admin</span>
-              </a>
-            </li>
-              <li>
+                <a class="nav-link" href="<?php echo base_url('admin/data_admin') ?>">
+                  <i class="fas fa-user"></i>
+                  <span>Data Admin</span>
+                </a>
+              </li>
+              <!-- <li>
                 <a class="nav-link" href="<?php echo base_url('admin/data_siswa') ?>">
                   <i class="fas fa-users"></i>
                   <span>Data Siswa</span>
                 </a>
-              </li>
+              </li> -->
               <li>
                 <a class="nav-link" href="<?php echo base_url('admin/data_kriteria') ?>">
                   <i class="fas fa-th"></i>
@@ -322,16 +328,22 @@
               <li>
                 <a class="nav-link" href="<?php echo base_url('admin/data_nilai_alternatif') ?>">
                   <i class="fas fa-random"></i>
-                  <span>Data Nilai Alternatif</span>
+                  <span>Data Nilai Siswa</span>
                 </a>
               </li>
               <li>
-              <a class="nav-link" href="<?php echo base_url('admin/data_rangking') ?>">
-                <i class="fas fa-clipboard-list"></i>
-                <span>Data Rangking</span>
-              </a>
-            </li>
+                <a class="nav-link" href="<?php echo base_url('admin/data_rangking') ?>">
+                  <i class="fas fa-clipboard-list"></i>
+                  <span>Data Rangking</span>
+                </a>
+              </li>
+              <li>
+                <a class="nav-link" href="<?php echo base_url('admin/data_rangking/keputusan/'); ?>">
+                  <i class="fas fa-laptop"></i>
+                  <span>Data Keputusan</span>
+                </a>
+              </li>
             </ul>
-            <?php } ?>
+          <?php } ?>
         </aside>
       </div>

@@ -81,10 +81,17 @@ class Data_periode extends CI_Controller
         );
     
         $this->titian_model->insert_data($data,'periode');
-        $this->session->set_flashdata('pesan','<div class="alert alert-success alert-dismissible fade show" role="alert">
-        Data periode berhasil ditambahkan!
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>');
+            $this->session->set_flashdata(
+                'pesan',
+                '<div class="alert alert-success alert-dismissible show fade">
+                <div class="alert-body">
+                <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+                </button>
+                Data periode berhasil ditambahkan!
+                </div>
+                </div>'
+            ); 
         redirect('admin/data_periode');
         }
     }
@@ -125,10 +132,17 @@ class Data_periode extends CI_Controller
         );
 
         $this->titian_model->update_data('periode', $data, $where);
-        $this->session->set_flashdata('pesan','<div class="alert alert-success alert-dismissible fade show" role="alert">
-        Data periode berhasil diupdate!
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>');
+            $this->session->set_flashdata(
+                'pesan',
+                '<div class="alert alert-warning alert-dismissible show fade">
+                <div class="alert-body">
+                <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+                </button>
+                Data admin berhasil diupdate!
+                </div>
+                </div>'
+            ); 
         redirect('admin/data_periode');
         }
     }
@@ -144,10 +158,17 @@ class Data_periode extends CI_Controller
     public function delete_periode($id){
         $where = array('id_periode' => $id);
         $this->titian_model->delete_data($where, 'periode');
-        $this->session->set_flashdata('pesan','<div class="alert alert-danger alert-dismissible fade show" role="alert">
-        Data periode berhasil dihapus!
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>');
+        $this->session->set_flashdata(
+            'pesan',
+            '<div class="alert alert-danger alert-dismissible show fade">
+                <div class="alert-body">
+                <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+                </button>
+                Data admin berhasil dihapus!
+                </div>
+                </div>'
+        ); 
         redirect('admin/data_periode');
     }
 }
