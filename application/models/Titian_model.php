@@ -52,18 +52,6 @@ class Titian_model extends CI_model
     }
   }
 
-  // public function get_all_data_siswa(){
-  //     $sql= "SELECT * FROM siswa";
-  //     $query = $this->db->query($sql);
-  //     if ($query->num_rows() > 0) {
-  //     $result = $query->result_array();
-  //     $query->free_result();
-  //     return $result;
-  //     }else{
-  //     return array();
-  //     }
-  // }
-
   public function ambil_id_siswa($id)
   {
     $hasil = $this->db->where('id_siswa', $id)->get('siswa');
@@ -154,4 +142,14 @@ class Titian_model extends CI_model
 
     return $this->db->get()->result(); // Ambil data pada tabel rangking sesuai kondisi diatas
   }
+
+  function joinNilaiAlternatif()
+  {
+    $this->db->select('nilai_alternatif.id_siswa, nama');
+    $this->db->from('nilai_alternatif');
+    $this->db->join('siswa', 'siswa.id_siswa = nilai_alternatif.id_siswa');
+    $this->db->group_by('nilai_alternatif.id_siswa');
+    $this->db->order_by('id_siswa');
+    return $this->db->get()->result();
+  }  
 }

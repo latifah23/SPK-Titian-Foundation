@@ -40,6 +40,8 @@ class Data_nilai_alternatif extends CI_Controller
     public function index()
     {
         $data['hasil_nilai'] = $this->titian_model->get_data_nilai();
+        $data['nama'] = $this->titian_model->joinNilaiAlternatif();
+        $data['kriteria']    = $this->titian_model->get_data('kriteria')->result();
         $this->load->view('template/header');
         $this->load->view('template/sidebar');
         $this->load->view('nilai_alternatif/data_nilai', $data);
@@ -147,7 +149,7 @@ class Data_nilai_alternatif extends CI_Controller
         $this->db->update_batch('nilai_alternatif', $data, 'id_nilai');
         $this->session->set_flashdata(
             'pesan',
-            '<div class="alert alert-success alert-dismissible show fade">
+            '<div class="alert alert-warning alert-dismissible show fade">
                 <div class="alert-body">
                 <button class="close" data-dismiss="alert">
                 <span>&times;</span>
@@ -164,10 +166,17 @@ class Data_nilai_alternatif extends CI_Controller
     {
         $where = array('id_siswa' => $id);
         $this->titian_model->delete_data($where, 'siswa');
-        $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-        Data nilai berhasil dihapus!
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>');
+        $this->session->set_flashdata(
+            'pesan',
+            '<div class="alert alert-danger alert-dismissible show fade">
+                <div class="alert-body">
+                <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+                </button>
+                Data berhasil di Hapus!
+                </div>
+                </div>'
+        );
         redirect('admin/data_nilai_alternatif');
     }
 

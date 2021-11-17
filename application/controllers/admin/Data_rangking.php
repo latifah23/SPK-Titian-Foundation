@@ -20,8 +20,7 @@ class Data_rangking extends CI_Controller
                 </div>'
             );
             redirect(base_url("login"));
-        } 
-        else if ($this->session->userdata('akses') !='manajer' && $this->session->userdata('akses')!='superadmin'){
+        } else if ($this->session->userdata('akses') != 'manajer' && $this->session->userdata('akses') != 'superadmin') {
             $this->session->set_flashdata(
                 'pesan',
                 '<div class="alert alert-warning alert-dismissible show fade">
@@ -51,42 +50,18 @@ class Data_rangking extends CI_Controller
     public function keputusan()
     {
         $data = $this->hitung_model->hitung();
-        // if (isset($_GET['filter']) && !empty($_GET['filter'])) { // Cek apakah user telah memilih filter dan klik tombol tampilkan
-        //     $filter = $_GET['filter']; // Ambil data filder yang dipilih user
-
-        //     if ($filter == '1') { // Jika filter nya 1 (per tanggal)
-        //         $tgl = $_GET['tanggal'];
-
-        //         $ket = 'Data Tanggal ' . date('d-m-y', strtotime($tgl));
-        //         $url_cetak = 'admin/data_rangking/cetak?filter=1&tanggal=' . $tgl;
-        //         $transaksi = $this->titian_model->view_by_date($tgl); // Panggil fungsi view_by_date yang ada di titian_model
-        //     } else if ($filter == '2') { // Jika filter nya 2 (per bulan)
-        //         $bulan = $_GET['bulan'];
-        //         $tahun = $_GET['tahun'];
-        //         $nama_bulan = array('', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
-
-        //         $ket = 'Data Bulan ' . $nama_bulan[$bulan] . ' ' . $tahun;
-        //         $url_cetak = 'admin/data_rangking/cetak?filter=2&bulan=' . $bulan . '&tahun=' . $tahun;
-        //         $transaksi = $this->titian_model->view_by_month($bulan, $tahun); // Panggil fungsi view_by_month yang ada di titian_model
-        //     } else { // Jika filter nya 3 (per tahun)
-        //         $tahun = $_GET['tahun'];
-
-        //         $ket = 'Data Tahun ' . $tahun;
-        //         $url_cetak = 'admin/data_rangking/cetak?filter=3&tahun=' . $tahun;
-        //         $transaksi = $this->titian_model->view_by_year($tahun); // Panggil fungsi view_by_year yang ada di titian_model
-        //     }
-        // } else { // Jika user tidak mengklik tombol tampilkan
-        //     $ket = 'Semua Data';
-        //     $url_cetak = 'admin/data_rangking/cetak';
-        //     $transaksi = $this->titian_model->view_all(); // Panggil fungsi view_all yang ada di titian_model
-        // }
         if (isset($_GET['tahun']) && !empty($_GET['tahun'])) { // Cek apakah user telah memilih filter dan klik tombol tampilkan
-                $tahun = $_GET['tahun'];
-                $ket = 'Data Tahun ' . $tahun;
-                $url_cetak = 'admin/data_rangking/cetak?tahun=' . $tahun;
-                $transaksi = $this->titian_model->view_by_year($tahun)->result(); // Panggil fungsi view_by_year yang ada di titian_model
-        } else { 
-        // Jika user tidak mengklik tombol tampilkan
+            $tahun = $_GET['tahun'];
+            $where = array('id_periode ' => $tahun);
+            $periodeSiswa  = $this->titian_model->get_where_data($where, 'periode')->result();
+            foreach ($periodeSiswa as $p){
+                $thn = $p->tahun;
+            }
+            $ket = 'Data Siswa periode ' . $thn;
+            $url_cetak = 'admin/data_rangking/cetak?tahun=' . $tahun;
+            $transaksi = $this->titian_model->view_by_year($tahun)->result(); // Panggil fungsi view_by_year yang ada di titian_model
+        } else {
+            // Jika user tidak mengklik tombol tampilkan
             $ket = 'Semua Data';
             $url_cetak = 'admin/data_rangking/cetak';
             $transaksi = $this->titian_model->view_all(); // Panggil fungsi view_all yang ada di titian_model
@@ -105,36 +80,19 @@ class Data_rangking extends CI_Controller
     public function cetak()
     {
         if (isset($_GET['tahun']) && !empty($_GET['tahun'])) { // Cek apakah user telah memilih filter dan klik tombol tampilkan
-            // $filter = $_GET['filter']; // Ambil data filder yang dipilih user
-
-            // if ($filter == '1') { // Jika filter nya 1 (per tanggal)
-            //     $tgl = $_GET['tanggal'];
-
-            //     $ket = 'Data Tanggal ' . date('d-m-y', strtotime($tgl));
-            //     $transaksi = $this->titian_model->view_by_date($tgl); // Panggil fungsi view_by_date yang ada di titian_model
-            // } else if ($filter == '2') { // Jika filter nya 2 (per bulan)
-            //     $bulan = $_GET['bulan'];
-            //     $tahun = $_GET['tahun'];
-            //     $nama_bulan = array('', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
-
-            //     $ket = 'Data Bulan ' . $nama_bulan[$bulan] . ' ' . $tahun;
-            //     $transaksi = $this->titian_model->view_by_month($bulan, $tahun); // Panggil fungsi view_by_month yang ada di titian_model
-            // } else { // Jika filter nya 3 (per tahun)
-                $tahun = $_GET['tahun'];
-
-                $ket = 'Data Tahun ' . $tahun;
-                $transaksi = $this->titian_model->view_by_year($tahun)->result(); // Panggil fungsi view_by_year yang ada di titian_model
-            }else { 
-                // Jika user tidak mengklik tombol tampilkan
-                    $ket = 'Semua Data';
-                    $url_cetak = 'admin/data_rangking/cetak';
-                    $transaksi = $this->titian_model->view_all(); // Panggil fungsi view_all yang ada di titian_model
-                }
-        // } else { // Jika user tidak mengklik tombol tampilkan
-        //     $ket = 'Semua Data';
-        //     $transaksi = $this->titian_model->view_all(); // Panggil fungsi view_all yang ada di titian_model
-        // }
-
+            $tahun = $_GET['tahun'];
+            $where = array('id_periode ' => $tahun);
+            $periodeSiswa  = $this->titian_model->get_where_data($where, 'periode')->result();
+            foreach ($periodeSiswa as $p) {
+                $thn = $p->tahun;
+            }
+            $ket = 'Data Siswa periode ' . $thn;
+            $transaksi = $this->titian_model->view_by_year($tahun)->result(); // Panggil fungsi view_by_year yang ada di titian_model
+        } else {
+            // Jika user tidak mengklik tombol tampilkan
+            $ket = 'Semua Data';
+            $transaksi = $this->titian_model->view_all(); // Panggil fungsi view_all yang ada di titian_model
+        }
         $data['ket'] = $ket;
         $data['transaksi'] = $transaksi;
 
