@@ -12,6 +12,7 @@
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
+                        <th>Periode</th>
                         <?php foreach ($kriteria as $value) {
                             echo "<th>" . $value->nama_kriteria . "</th>";
                         } ?>
@@ -27,6 +28,7 @@
                         <tr>
                             <td><?php echo $count++  ?></td>
                             <td><?php echo $value->nama ?></td>
+                            <td><?php echo $value->tahun ?></td>                            
                             <?php foreach ($nilai_alternatif as $key => $value2) { ?>
                                 <td><?php echo $value2->nilai ?></td>
                             <?php } ?>

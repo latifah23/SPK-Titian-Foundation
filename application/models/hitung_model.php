@@ -34,6 +34,7 @@ class hitung_model extends CI_model
         // $siswa = $this->leftjoin();
         // echo '<pre> Siswa = ' . json_encode($siswa) . '<pre><br>';
         $siswa = $this->db->get('siswa')->result();
+        // $siswa = $this->db->get_where('siswa', array('id_periode' => '1'))->result();
         // echo '<pre> Siswa = ' . json_encode($siswa) . '<pre><br>';
         $kriteria = $this->db->get('kriteria')->result();
 

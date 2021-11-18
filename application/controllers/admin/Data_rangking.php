@@ -39,8 +39,29 @@ class Data_rangking extends CI_Controller
     }
     public function index()
     {
-
         $data = $this->hitung_model->hitung();
+        if (isset($_GET['tahun']) && !empty($_GET['tahun'])) { // Cek apakah user telah memilih filter dan klik tombol tampilkan
+            $tahun = $_GET['tahun'];
+            $where = array('id_periode ' => $tahun);
+            $periodeSiswa  = $this->titian_model->get_where_data($where, 'periode')->result();
+            foreach ($periodeSiswa as $p) {
+                $thn = $p->tahun;
+            }
+            $ket = 'Data Siswa periode ' . $thn;
+            $url_cetak = 'admin/data_rangking/cetak?tahun=' . $tahun;
+            $transaksi = $this->titian_model->view_by_year($tahun)->result(); // Panggil fungsi view_by_year yang ada di titian_model
+        } else {
+            // Jika user tidak mengklik tombol tampilkan
+            $ket = 'Semua Data';
+            $url_cetak = 'admin/data_rangking/cetak';
+            $transaksi = $this->titian_model->view_all(); // Panggil fungsi view_all yang ada di titian_model
+        }
+        $data['ket'] = $ket;
+        $data['url_cetak'] = base_url($url_cetak);
+        $data['transaksi'] = $transaksi;
+        // $data['option_tahun'] = $this->titian_model->option_tahun();
+        $data['option_tahun'] = $this->titian_model->get_data('periode')->result();
+        // $data['ranks'] = $this->titian_model->get_data('rangking')->result();              
         $this->load->view('template/header');
         $this->load->view('template/sidebar');
         $this->load->view('rank/data_rank', $data);
