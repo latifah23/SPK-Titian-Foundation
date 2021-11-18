@@ -39,29 +39,28 @@ class Data_rangking extends CI_Controller
     }
     public function index()
     {
-        $data = $this->hitung_model->hitung();
-        if (isset($_GET['tahun']) && !empty($_GET['tahun'])) { // Cek apakah user telah memilih filter dan klik tombol tampilkan
+        if (isset($_GET['tahun']) && !empty($_GET['tahun'])) {
             $tahun = $_GET['tahun'];
+            $data = $this->hitung_model->hitung($tahun);
             $where = array('id_periode ' => $tahun);
             $periodeSiswa  = $this->titian_model->get_where_data($where, 'periode')->result();
             foreach ($periodeSiswa as $p) {
                 $thn = $p->tahun;
             }
             $ket = 'Data Siswa periode ' . $thn;
-            $url_cetak = 'admin/data_rangking/cetak?tahun=' . $tahun;
-            $transaksi = $this->titian_model->view_by_year($tahun)->result(); // Panggil fungsi view_by_year yang ada di titian_model
         } else {
-            // Jika user tidak mengklik tombol tampilkan
-            $ket = 'Semua Data';
-            $url_cetak = 'admin/data_rangking/cetak';
-            $transaksi = $this->titian_model->view_all(); // Panggil fungsi view_all yang ada di titian_model
+            $thn = date("Y");
+            $where = array('tahun ' => $thn);
+            $periodeSiswa  = $this->titian_model->get_where_data($where, 'periode')->result();
+            foreach ($periodeSiswa as $p) {
+                $tahun = $p->id_periode;
+            }
+            $data = $this->hitung_model->hitung($tahun);
+            $ket = 'Data Siswa periode ' . $thn;
         }
         $data['ket'] = $ket;
-        $data['url_cetak'] = base_url($url_cetak);
-        $data['transaksi'] = $transaksi;
-        // $data['option_tahun'] = $this->titian_model->option_tahun();
+        $data['thn'] = $thn;
         $data['option_tahun'] = $this->titian_model->get_data('periode')->result();
-        // $data['ranks'] = $this->titian_model->get_data('rangking')->result();              
         $this->load->view('template/header');
         $this->load->view('template/sidebar');
         $this->load->view('rank/data_rank', $data);
@@ -70,29 +69,34 @@ class Data_rangking extends CI_Controller
 
     public function keputusan()
     {
-        $data = $this->hitung_model->hitung();
-        if (isset($_GET['tahun']) && !empty($_GET['tahun'])) { // Cek apakah user telah memilih filter dan klik tombol tampilkan
+        if (isset($_GET['tahun']) && !empty($_GET['tahun'])) {
             $tahun = $_GET['tahun'];
+            $data = $this->hitung_model->hitung($tahun);
             $where = array('id_periode ' => $tahun);
             $periodeSiswa  = $this->titian_model->get_where_data($where, 'periode')->result();
-            foreach ($periodeSiswa as $p){
+            foreach ($periodeSiswa as $p) {
                 $thn = $p->tahun;
             }
             $ket = 'Data Siswa periode ' . $thn;
             $url_cetak = 'admin/data_rangking/cetak?tahun=' . $tahun;
-            $transaksi = $this->titian_model->view_by_year($tahun)->result(); // Panggil fungsi view_by_year yang ada di titian_model
+            $transaksi = $this->titian_model->view_by_year($tahun)->result();
         } else {
-            // Jika user tidak mengklik tombol tampilkan
-            $ket = 'Semua Data';
-            $url_cetak = 'admin/data_rangking/cetak';
-            $transaksi = $this->titian_model->view_all(); // Panggil fungsi view_all yang ada di titian_model
+            $thn = date("Y");
+            $where = array('tahun ' => $thn);
+            $periodeSiswa  = $this->titian_model->get_where_data($where, 'periode')->result();
+            foreach ($periodeSiswa as $p) {
+                $tahun = $p->id_periode;
+            }
+            $data = $this->hitung_model->hitung($tahun);
+            $ket = 'Data Siswa periode ' . $thn;
+            $url_cetak = 'admin/data_rangking/cetak?tahun=' . $tahun;
+            $transaksi = $this->titian_model->view_by_year($tahun)->result();
         }
         $data['ket'] = $ket;
+        $data['thn'] = $thn;
         $data['url_cetak'] = base_url($url_cetak);
         $data['transaksi'] = $transaksi;
-        // $data['option_tahun'] = $this->titian_model->option_tahun();
         $data['option_tahun'] = $this->titian_model->get_data('periode')->result();
-        // $data['ranks'] = $this->titian_model->get_data('rangking')->result();      
         $this->load->view('template/header');
         $this->load->view('template/sidebar');
         $this->load->view('rank/data_keputusan', $data);
@@ -102,21 +106,31 @@ class Data_rangking extends CI_Controller
     {
         if (isset($_GET['tahun']) && !empty($_GET['tahun'])) { // Cek apakah user telah memilih filter dan klik tombol tampilkan
             $tahun = $_GET['tahun'];
+            $data = $this->hitung_model->hitung($tahun);
             $where = array('id_periode ' => $tahun);
             $periodeSiswa  = $this->titian_model->get_where_data($where, 'periode')->result();
             foreach ($periodeSiswa as $p) {
                 $thn = $p->tahun;
+                $gen = $p->generasi;
             }
             $ket = 'Data Siswa periode ' . $thn;
-            $transaksi = $this->titian_model->view_by_year($tahun)->result(); // Panggil fungsi view_by_year yang ada di titian_model
         } else {
-            // Jika user tidak mengklik tombol tampilkan
-            $ket = 'Semua Data';
-            $transaksi = $this->titian_model->view_all(); // Panggil fungsi view_all yang ada di titian_model
+            $thn = date("Y");
+            $where = array('tahun ' => $thn);
+            $periodeSiswa  = $this->titian_model->get_where_data($where, 'periode')->result();
+            foreach ($periodeSiswa as $p) {
+                $tahun = $p->id_periode;
+                $gen = $p->generasi;
+            }
+            $data = $this->hitung_model->hitung($tahun);
+            $ket = 'Data Siswa periode ' . $thn;
         }
         $data['ket'] = $ket;
-        $data['transaksi'] = $transaksi;
-
+        $data['thn'] = $thn;
+        $data['gen'] = $gen;
+        $w = array('periode.id_periode ' => $tahun);
+        $data['nama'] = $this->titian_model->joinNilaiAlternatifWhere($w);
+        $data['kriteria']    = $this->titian_model->get_data('kriteria')->result();        
         $this->load->view('rank/print', $data);
     }
     public function insert()

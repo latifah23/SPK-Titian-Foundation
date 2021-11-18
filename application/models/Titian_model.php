@@ -52,21 +52,6 @@ class Titian_model extends CI_model
     }
   }
 
-  public function ambil_id_siswa($id)
-  {
-    $hasil = $this->db->where('id_siswa', $id)->get('siswa');
-    if ($hasil->num_rows() > 0) {
-      return $hasil->result();
-    } else {
-      return false;
-    }
-  }
-
-  public function get_siswa()
-  {
-    $query = $this->db->get('siswa')->result();
-  }
-
 
   public function get_data_nilai()
   {
@@ -93,28 +78,6 @@ class Titian_model extends CI_model
     }
   }
 
-  // Filter pencarian berdasarkan tanggal
-  public function view_by_date($date)
-  {
-    $this->db->where('DATE(tanggal)', $date); // Tambahkan where tanggal nya
-
-    return $this->db->get('rangking')->result(); // Tampilkan data rangking sesuai tanggal yang diinput oleh user pada filter
-  }
-
-  public function view_by_month($month, $year)
-  {
-    $this->db->where('MONTH(tanggal)', $month); // Tambahkan where bulan
-    $this->db->where('YEAR(tanggal)', $year); // Tambahkan where tahun
-
-    return $this->db->get('rangking')->result(); // Tampilkan data rangking sesuai bulan dan tahun yang diinput oleh user pada filter
-  }
-
-  // public function view_by_year($year)
-  // {
-  //   $this->db->where('YEAR(tanggal)', $year); // Tambahkan where tahun
-
-  //   return $this->db->get('rangking')->result(); // Tampilkan data rangking sesuai tahun yang diinput oleh user pada filter
-  // }
   public function view_by_year($year)
   {
     $this->db->select('*, siswa.nama as nama_siswa');
@@ -123,14 +86,6 @@ class Titian_model extends CI_model
     $this->db->where('siswa.id_periode', $year); // Tambahkan where tahun
 
     return $this->db->get(); // Tampilkan data rangking sesuai tahun yang diinput oleh user pada filter
-  }
-
-  public function view_all()
-  {
-    $this->db->select('*, siswa.nama as nama_siswa');
-    $this->db->from('rangking');
-    $this->db->join('siswa', 'siswa.id_siswa = rangking.id_siswa');
-    return $this->db->get()->result(); // Tampilkan semua data rangking
   }
 
   public function option_tahun()
@@ -150,6 +105,17 @@ class Titian_model extends CI_model
     $this->db->join('siswa', 'siswa.id_siswa = nilai_alternatif.id_siswa');
     $this->db->join('periode', 'periode.id_periode = siswa.id_periode');
     $this->db->group_by('nilai_alternatif.id_siswa');
+    $this->db->order_by('id_siswa');
+    return $this->db->get()->result();
+  }  
+  function joinNilaiAlternatifWhere($where)
+  {
+    $this->db->select('nilai_alternatif.id_siswa, nama, asal_sekolah, tahun');
+    $this->db->from('nilai_alternatif');
+    $this->db->join('siswa', 'siswa.id_siswa = nilai_alternatif.id_siswa');
+    $this->db->join('periode', 'periode.id_periode = siswa.id_periode');
+    $this->db->group_by('nilai_alternatif.id_siswa');
+    $this->db->where($where);
     $this->db->order_by('id_siswa');
     return $this->db->get()->result();
   }  
