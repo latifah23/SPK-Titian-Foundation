@@ -23,9 +23,25 @@ class Login extends CI_Controller
 		$level = $this->input->post('level');
 		$where = array(
 			'username' => $username,
+			'level' => $level,
 			'password' => md5($password)
 		);
-		$cek = $this->m_login->cek_login("admin", $where)->num_rows();
+		$cek = $this->m_login->cek_login("admin", $where)->num_rows();			
+		$data = $this->db->query("SELECT status FROM admin WHERE username = '$username'")->row_array();
+		if($data['status'] == "0"){
+			$this->session->set_flashdata(
+				'pesan',
+				'<div class="alert alert-danger alert-dismissible show fade">
+                <div class="alert-body">
+                <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+                </button>
+                Maaf akun anda sudah tidak aktif, silahkan hubingi admin
+                </div>
+                </div>'
+			);
+			redirect(base_url('login'));			
+		}
 
 		if ($level == 'admin') {
 			if ($cek > 0) {
@@ -81,8 +97,7 @@ class Login extends CI_Controller
 				);
 				redirect(base_url('login'));
 			}
-		}
-		elseif ($level == 'superadmin') {
+		} elseif ($level == 'superadmin') {
 			if ($cek > 0) {
 
 				$data_session = array(
@@ -111,7 +126,6 @@ class Login extends CI_Controller
 			}
 		}
 	}
-
 	function logout()
 	{
 		$this->session->sess_destroy();
