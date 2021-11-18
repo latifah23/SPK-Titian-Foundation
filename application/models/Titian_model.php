@@ -108,4 +108,15 @@ class Titian_model extends CI_model
     $this->db->order_by('id_siswa');
     return $this->db->get()->result();
   }  
+  function joinNilaiAlternatifWhere($where)
+  {
+    $this->db->select('nilai_alternatif.id_siswa, nama, asal_sekolah, tahun');
+    $this->db->from('nilai_alternatif');
+    $this->db->join('siswa', 'siswa.id_siswa = nilai_alternatif.id_siswa');
+    $this->db->join('periode', 'periode.id_periode = siswa.id_periode');
+    $this->db->group_by('nilai_alternatif.id_siswa');
+    $this->db->where($where);
+    $this->db->order_by('id_siswa');
+    return $this->db->get()->result();
+  }  
 }

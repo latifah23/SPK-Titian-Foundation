@@ -111,22 +111,26 @@ class Data_rangking extends CI_Controller
             $periodeSiswa  = $this->titian_model->get_where_data($where, 'periode')->result();
             foreach ($periodeSiswa as $p) {
                 $thn = $p->tahun;
+                $gen = $p->generasi;
             }
             $ket = 'Data Siswa periode ' . $thn;
-            $transaksi = $this->titian_model->view_by_year($tahun)->result(); // Panggil fungsi view_by_year yang ada di titian_model
         } else {
             $thn = date("Y");
             $where = array('tahun ' => $thn);
             $periodeSiswa  = $this->titian_model->get_where_data($where, 'periode')->result();
             foreach ($periodeSiswa as $p) {
                 $tahun = $p->id_periode;
+                $gen = $p->generasi;
             }
             $data = $this->hitung_model->hitung($tahun);
             $ket = 'Data Siswa periode ' . $thn;
-            $transaksi = $this->titian_model->view_by_year($tahun)->result();
         }
         $data['ket'] = $ket;
-        $data['transaksi'] = $transaksi;
+        $data['thn'] = $thn;
+        $data['gen'] = $gen;
+        $w = array('periode.id_periode ' => $tahun);
+        $data['nama'] = $this->titian_model->joinNilaiAlternatifWhere($w);
+        $data['kriteria']    = $this->titian_model->get_data('kriteria')->result();        
         $this->load->view('rank/print', $data);
     }
     public function insert()
