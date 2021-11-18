@@ -145,9 +145,10 @@ class Titian_model extends CI_model
 
   function joinNilaiAlternatif()
   {
-    $this->db->select('nilai_alternatif.id_siswa, nama');
+    $this->db->select('nilai_alternatif.id_siswa, nama, tahun');
     $this->db->from('nilai_alternatif');
     $this->db->join('siswa', 'siswa.id_siswa = nilai_alternatif.id_siswa');
+    $this->db->join('periode', 'periode.id_periode = siswa.id_periode');
     $this->db->group_by('nilai_alternatif.id_siswa');
     $this->db->order_by('id_siswa');
     return $this->db->get()->result();
