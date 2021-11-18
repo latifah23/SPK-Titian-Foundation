@@ -13,7 +13,7 @@
                             <h6>Filter Siswa berdasarkan tahun : </h6>
                             <select name="tahun" class="form-control">
                                 <?php
-                                echo '<option value="">Semua</option>';
+                                echo '<option value=""> --- ' . $thn. ' --- </option>';
                                 foreach ($option_tahun as $data) { // Ambil data tahun dari model yang dikirim dari controller
                                     echo '<option value="' . $data->id_periode . '">' . $data->tahun . '</option>';
                                 }
@@ -263,16 +263,17 @@
                                 <tbody>
                                     <?php
                                     if (isset($jaridl)) {
-                                    foreach ($jaridl as $key2) {
+                                        foreach ($jaridl as $key2) {
                                     ?>
-                                        <tr>
-                                            <td><?= $key2['no'] ?></td>
-                                            <td><?= $key2['nama'] ?></td>
-                                            <td><?= number_format($key2['jarakpositif'], 2) ?></td>
-                                            <td><?= number_format($key2['jaraknegatif'], 2) ?></td>
-                                        </tr>
+                                            <tr>
+                                                <td><?= $key2['no'] ?></td>
+                                                <td><?= $key2['nama'] ?></td>
+                                                <td><?= number_format($key2['jarakpositif'], 2) ?></td>
+                                                <td><?= number_format($key2['jaraknegatif'], 2) ?></td>
+                                            </tr>
                                     <?php
-                                    }}
+                                        }
+                                    }
                                     ?>
                                 </tbody>
                             </table>

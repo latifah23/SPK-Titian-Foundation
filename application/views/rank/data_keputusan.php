@@ -12,7 +12,7 @@
                         <h6>Filter Berdasarkan <?php echo $ket; ?></h6>
                         <select name="tahun" class="form-control">
                             <?php
-                            echo '<option value="">Semua</option>';
+                            echo '<option value=""> --- ' . $thn . ' --- </option>';
                             foreach ($option_tahun as $data) { // Ambil data tahun dari model yang dikirim dari controller
                                 echo '<option value="' . $data->id_periode . '">' . $data->tahun . '</option>';
                             }

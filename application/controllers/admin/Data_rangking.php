@@ -59,6 +59,7 @@ class Data_rangking extends CI_Controller
             $ket = 'Data Siswa periode ' . $thn;
         }
         $data['ket'] = $ket;
+        $data['thn'] = $thn;
         $data['option_tahun'] = $this->titian_model->get_data('periode')->result();
         $this->load->view('template/header');
         $this->load->view('template/sidebar');
@@ -92,6 +93,7 @@ class Data_rangking extends CI_Controller
             $transaksi = $this->titian_model->view_by_year($tahun)->result();
         }
         $data['ket'] = $ket;
+        $data['thn'] = $thn;
         $data['url_cetak'] = base_url($url_cetak);
         $data['transaksi'] = $transaksi;
         $data['option_tahun'] = $this->titian_model->get_data('periode')->result();
