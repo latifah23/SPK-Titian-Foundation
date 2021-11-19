@@ -53,6 +53,21 @@ class Data_periode extends CI_Controller
     }
     public function add_periode_aksi()
     {
+        $cek = $this->db->get_where('periode', array('generasi' => $this->input->post('generasi')));
+        if ($cek->num_rows() != 0) {
+            $this->session->set_flashdata(
+                'pesan',
+                '<div class="alert alert-danger alert-dismissible show fade">
+                      <div class="alert-body">
+                        <button class="close" data-dismiss="alert">
+                          <span>&times;</span>
+                        </button>
+                        Maaf Data sudah ada!
+                    </div>
+                </div>'
+            );
+            redirect('admin/data_periode');
+        }         
         $this->_rules();
 
         if($this->form_validation->run() == TRUE)

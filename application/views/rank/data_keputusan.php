@@ -24,11 +24,9 @@
                         <a href="<?php echo base_url('admin/data_rangking/keputusan'); ?>" class="btn btn-info mt-3">Reset Filter</a>
                     </div>
                 </form>
-                <div class="ml-auto p-2">
-                    <a href="<?php echo $url_cetak; ?>" class="btn btn-danger mt-3" target="_blank">Print PDF <i class="fas fa-print"></i></a>
-                </div>
             </div>
             <div class="card-body p-2">
+                <?php echo $this->session->flashdata('pesan') ?>
                 <h5>Form input keputusan</h5>
                 <form action="<?php echo base_url('admin/data_rangking/insert') ?>" method="POST" enctype="multipart/form-data">
                     <div class="table-responsive">
@@ -99,8 +97,14 @@
         </div>
         <div class="card">
             <div class="card-body p-2">
-                <b><?php echo $ket; ?></b>
-                <!-- End Filter -->
+                <div class="d-flex">                    
+                    <div class="p-2">
+                        <b><?php echo $ket; ?></b>                        
+                    </div>
+                    <div class="ml-auto p-2">
+                        <a href="<?php echo $url_cetak; ?>" class="btn btn-danger mt-3" target="_blank">Print PDF <i class="fas fa-print"></i></a>
+                    </div>
+                </div>
                 <form action="<?php echo base_url('admin/data_rangking/update') ?>" method="POST" enctype="multipart/form-data">
                     <div class="table-responsive">
                         <table class="table table-hover table-striped table-bordered">
