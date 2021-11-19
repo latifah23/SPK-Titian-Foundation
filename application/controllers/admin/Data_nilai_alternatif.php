@@ -60,6 +60,21 @@ class Data_nilai_alternatif extends CI_Controller
 
     public function add_nilai_aksi()
     {
+        $cek = $this->db->get_where('siswa', array('asal_sekolah' => $this->input->post('asal_sekolah')));
+        if ($cek->num_rows() != 0) {
+            $this->session->set_flashdata(
+                'pesan',
+                '<div class="alert alert-danger alert-dismissible show fade">
+                      <div class="alert-body">
+                        <button class="close" data-dismiss="alert">
+                          <span>&times;</span>
+                        </button>
+                        Maaf Data sudah ada!
+                    </div>
+                </div>'
+            );
+            redirect('admin/data_nilai_alternatif');
+        }         
         // $this->_rules();
 
         // if ($this->form_validation->run() == FALSE) {

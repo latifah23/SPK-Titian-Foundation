@@ -56,6 +56,21 @@ class Data_admin extends CI_Controller
     }
     public function add_admin_aksi()
     {
+        $cek = $this->db->get_where('admin', array('nama' => $this->input->post('nama')));
+        if ($cek->num_rows() != 0) {
+            $this->session->set_flashdata(
+                'pesan',
+                '<div class="alert alert-danger alert-dismissible show fade">
+                      <div class="alert-body">
+                        <button class="close" data-dismiss="alert">
+                          <span>&times;</span>
+                        </button>
+                        Maaf Data sudah ada!
+                    </div>
+                </div>'
+            );
+            redirect('admin/data_admin');
+        }        
         $this->_rules();
 
         if($this->form_validation->run() == FALSE)

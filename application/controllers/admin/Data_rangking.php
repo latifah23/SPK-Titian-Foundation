@@ -136,6 +136,22 @@ class Data_rangking extends CI_Controller
     public function insert()
     {
         $id_rank    = $this->input->post('id_rank');
+        $id_siswa    = $this->input->post('id_siswa');
+        $cek = $this->db->get_where('rangking', array('id_siswa' => $id_siswa[0]));
+        if ($cek->num_rows() != 0) {
+            $this->session->set_flashdata(
+                'pesan',
+                '<div class="alert alert-danger alert-dismissible show fade">
+                      <div class="alert-body">
+                        <button class="close" data-dismiss="alert">
+                          <span>&times;</span>
+                        </button>
+                        Maaf Data sudah ada!
+                    </div>
+                </div>'
+            );
+            redirect('admin/data_rangking/keputusan');
+        }           
         foreach ($id_rank as $key => $value) {
             $data = array(
                 "rangking"          => $id_rank[$key],
@@ -164,17 +180,34 @@ class Data_rangking extends CI_Controller
             // $this->titian_model->insert_data($data, 'rangking');
         }
         $this->db->update_batch('rangking', $datar, 'id_rangking');
-        echo json_encode($datar);
+        $this->session->set_flashdata(
+            'pesan',
+            '<div class="alert alert-warning alert-dismissible show fade">
+                <div class="alert-body">
+                <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+                </button>
+                Data keputusan berhasil di Update!
+                </div>
+                </div>'
+        );
         redirect('admin/data_rangking/keputusan');
     }
     public function delete($id)
     {
         $where = array('id_rangking' => $id);
         $this->titian_model->delete_data($where, 'rangking');
-        $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-        Data Rangking berhasil dihapus!
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>');
+        $this->session->set_flashdata(
+            'pesan',
+            '<div class="alert alert-danger alert-dismissible show fade">
+                <div class="alert-body">
+                <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+                </button>
+                Data keputusan berhasil di Hapus!
+                </div>
+                </div>'
+        );
         redirect('admin/data_rangking/keputusan');
     }
 }
