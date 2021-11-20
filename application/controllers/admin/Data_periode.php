@@ -53,8 +53,9 @@ class Data_periode extends CI_Controller
     }
     public function add_periode_aksi()
     {
-        $cek = $this->db->get_where('periode', array('generasi' => $this->input->post('generasi')));
-        if ($cek->num_rows() != 0) {
+        $cek1 = $this->db->get_where('periode', array('generasi' => $this->input->post('generasi')));
+        $cek2 = $this->db->get_where('periode', array('tahun' => $this->input->post('tahun')));
+        if ($cek1->num_rows() || $cek2->num_rows() != 0) {
             $this->session->set_flashdata(
                 'pesan',
                 '<div class="alert alert-danger alert-dismissible show fade">
@@ -67,16 +68,17 @@ class Data_periode extends CI_Controller
                 </div>'
             );
             redirect('admin/data_periode');
-        }         
+        } 
+
         $this->_rules();
 
-        if($this->form_validation->run() == TRUE)
+        if($this->form_validation->run() == FALSE)
         {
             $this->add_periode();
         }else{
-            $id_periode           = $this->input->post('id_periode');
-            $generasi               = $this->input->post('generasi');
-            $tahun       = $this->input->post('tahun');
+            $id_periode     = $this->input->post('id_periode');
+            $generasi       = $this->input->post('generasi');
+            $tahun          = $this->input->post('tahun');
 
             $dom_kode = $this->titian_model->get_urutan_kode_terakhir();
             $dom_kode = substr($dom_kode, 1);
@@ -113,7 +115,7 @@ class Data_periode extends CI_Controller
 
     public function update_periode($id)
     {
-        $where = array('id_periode' => $id);
+        // $where = array('id_periode' => $id);
         $data['periode'] = $this->db->query("SELECT * FROM periode WHERE id_periode = '$id'")->result();
         $this->load->view('template/header');
         $this->load->view('template/sidebar');
@@ -123,22 +125,22 @@ class Data_periode extends CI_Controller
 
     public function update_periode_aksi()
     {
-        $this->_rules();
         $id             = $this->input->post('id_periode');
+        $this->_rules();
         
         if($this->form_validation->run() == FALSE)
         {
-            redirect(site_url('update_periode'.$id));
+            $this->update_periode($id);
             
         }else{
-            $id_periode           = $this->input->post('id_periode');
-            $generasi               = $this->input->post('generasi');
-            $tahun       = $this->input->post('tahun');
+            $id_periode = $this->input->post('id_periode');
+            $generasi   = $this->input->post('generasi');
+            $tahun      = $this->input->post('tahun');
            
         $data = array(
-            'id_periode'          => $id_periode,
-            'generasi'              => $generasi,
-            'tahun'      => $tahun,
+            'id_periode'    => $id_periode,
+            'generasi'      => $generasi,
+            'tahun'         => $tahun,
             
         );
 
@@ -164,7 +166,7 @@ class Data_periode extends CI_Controller
 
     public function _rules()
     {
-        $this->form_validation->set_rules('id_periode','Id_periode','required');
+        // $this->form_validation->set_rules('id_periode','Id_periode','required');
         $this->form_validation->set_rules('generasi','Generasi','required');
         $this->form_validation->set_rules('tahun','Tahun','required');
         
@@ -187,4 +189,3 @@ class Data_periode extends CI_Controller
         redirect('admin/data_periode');
     }
 }
-?>
