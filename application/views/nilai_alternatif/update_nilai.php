@@ -13,7 +13,6 @@
                                 <div class="form-group">
                                     <label>Kode</label>
                                     <input type="text" name="id_siswa" class="form-control" value="<?= $sw->id_siswa ?>" readonly>
-                                    <?php echo form_error('nama', '<div class="text-small text-danger">', '</div>') ?>
                                 </div>
                                 <div class="form-group">
                                     <label>Nama Siswa</label>
@@ -31,13 +30,11 @@
                                         <?php
                                         $where = array('id_periode ' => $sw->id_periode);
                                         $periodeSiswa  = $this->titian_model->get_where_data($where, 'periode')->result();
-                                        foreach ($periodeSiswa as $p) : ?>
-                                            <option value="<?php echo $p->id_periode; ?>">---<?php echo $p->tahun ?>---</option>
-                                        <?php endforeach; ?>
-                                        <?php foreach ($periode as $sw) : ?>
-                                            <option value="<?php echo $sw->id_periode ?>">
-                                                <?php echo $sw->tahun ?>
-                                            </option>
+                                        foreach ($periodeSiswa as $p) : ?>                                            
+                                            <?php foreach ($periode as $sw) : ?>
+                                                <option <?php if ($p->id_periode == $sw->id_periode) echo "selected"; ?> value="<?php echo $sw->id_periode; ?>">
+                                                    <?php echo $sw->tahun ?>
+                                                </option> <?php endforeach; ?>
                                         <?php endforeach; ?>
                                     </select>
                                     <?php echo form_error('id_periode', '<div class="text-small text-danger">', '</div>') ?>

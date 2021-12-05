@@ -13,17 +13,24 @@
                                 <!-- <div class="form-group">
                                     <label>Kode</label>
                                     <input type="text" name="id_kriteria" class="form-control" value="<?= $ad->id_kriteria ?>" readonly>
+<<<<<<< HEAD
                                     <?php echo form_error('id_kriteria', '<div class="text-small text-danger">', '</div>') ?>
                                 </div> -->
+=======
+                                </div>
+>>>>>>> 2a69229089e583c2b7cbf6538e8a05ec7e7223af
                                 <div class="form-group">
                                     <label>Nama Kriteria</label>
                                     <input type="text" name="nama_kriteria" class="form-control" value="<?php echo $ad->nama_kriteria ?>">
-                                    <?php echo form_error('kriteria', '<div class="text-small text-danger">', '</div>') ?>
+                                    <?php echo form_error('nama_kriteria', '<div class="text-small text-danger">', '</div>') ?>
                                 </div>
                                 <div class="form-group">
-                                    <label>Atribut</label>
-                                    <input type="text" name="atribut" class="form-control" value="<?php echo $ad->atribut ?>">
+                                    <label>Atribut</label>                                    
                                     <?php echo form_error('atribut', '<div class="text-small text-danger">', '</div>') ?>
+                                    <select name="atribut" class="form-control">
+                                        <option <?php if ($ad->atribut == 'Benefit') echo "selected"; ?>  value="<?php echo "Benefit" ?>">Benefit</option>
+                                        <option <?php if ($ad->atribut == 'Cost') echo "selected"; ?>  value="<?php echo "Cost" ?>">Cost</option>                                        
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Bobot</label>

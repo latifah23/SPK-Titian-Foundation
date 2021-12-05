@@ -12,10 +12,11 @@
                         <h6>Filter Berdasarkan tahun : <?php echo $ket; ?></h6>
                         <select name="tahun" class="form-control">
                             <?php
-                            echo '<option value=""> --- ' . $thn . ' --- </option>';
                             foreach ($option_tahun as $data) { // Ambil data tahun dari model yang dikirim dari controller
-                                echo '<option value="' . $data->id_periode . '">' . $data->tahun . '</option>';
-                            }
+                            ?>
+                                <option <?php if ($data->id_periode == $id_thn) echo "selected"; ?> value=" <?php echo $data->id_periode ?>">
+                                    <?php echo $data->tahun ?> </option>
+                            <?php }
                             ?>
                         </select>
                     </div>
@@ -97,9 +98,9 @@
         </div>
         <div class="card">
             <div class="card-body p-2">
-                <div class="d-flex">                    
+                <div class="d-flex">
                     <div class="p-2">
-                        <b><?php echo $ket; ?></b>                        
+                        <b><?php echo $ket; ?></b>
                     </div>
                     <div class="ml-auto p-2">
                         <a href="<?php echo $url_cetak; ?>" class="btn btn-danger mt-3" target="_blank">Print PDF <i class="fas fa-print"></i></a>
@@ -130,8 +131,14 @@
                                                 <?php echo $value->tanggal ?>
                                             </td>
                                             <td>
+<<<<<<< HEAD
                                                 <?php echo $value->keputusan ?>
                                                 <input type="hidden" name="id_rank[]" value="<?php echo $value->id_keputusan; ?>">
+=======
+                                                <?php echo $value->rangking ?>
+                                                <input type="hidden" name="id_rank[]" value="<?php echo $value->id_rangking; ?>">
+                                                <input type="hidden" name="tahun" value="<?php echo $value->id_periode; ?>">
+>>>>>>> 2a69229089e583c2b7cbf6538e8a05ec7e7223af
                                             </td>
                                             <td>
                                                 <?php echo $value->nama_siswa ?>
@@ -152,12 +159,11 @@
                                             </td>
                                             <td>
                                                 <select name="keputusan[]"" id="" class=" form-control">
-                                                    <option value="<?php echo $value->keputusan ?>"><?php echo $value->keputusan ?></option>
-                                                    <option value="<?php echo "Tidak" ?>">Tidak</option>
-                                                    <option value="<?php echo "Satu Bulan" ?>">Satu Bulan</option>
-                                                    <option value="<?php echo "Tiga Bulan" ?>">Tiga Bulan</option>
-                                                    <option value="<?php echo "Enam Bulan" ?>">Enam Bulan</option>
-                                                    <option value="<?php echo "Satu Tahun" ?>">Satu Tahun</option>
+                                                    <option <?php if ($value->keputusan == 'Tidak') echo "selected"; ?> value="<?php echo "Tidak" ?>">Tidak</option>
+                                                    <option <?php if ($value->keputusan == 'Satu Bulan') echo "selected"; ?> value="<?php echo "Satu Bulan" ?>">Satu Bulan</option>
+                                                    <option <?php if ($value->keputusan == 'Tiga Bulan') echo "selected"; ?> value="<?php echo "Tiga Bulan" ?>">Tiga Bulan</option>
+                                                    <option <?php if ($value->keputusan == 'Enam Bulan') echo "selected"; ?> value="<?php echo "Enam Bulan" ?>">Enam Bulan</option>
+                                                    <option <?php if ($value->keputusan == 'Satu Tahun') echo "selected"; ?> value="<?php echo "Satu Tahun" ?>">Satu Tahun</option>
                                                 </select>
                                             </td>
                                             <td>

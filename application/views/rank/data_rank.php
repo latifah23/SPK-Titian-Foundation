@@ -13,10 +13,11 @@
                             <h6>Filter siswa berdasarkan tahun : </h6>
                             <select name="tahun" class="form-control">
                                 <?php
-                                echo '<option value=""> --- ' . $thn. ' --- </option>';
                                 foreach ($option_tahun as $data) { // Ambil data tahun dari model yang dikirim dari controller
-                                    echo '<option value="' . $data->id_periode . '">' . $data->tahun . '</option>';
-                                }
+                                ?>
+                                    <option <?php if ($data->id_periode == $id_thn) echo "selected"; ?> value=" <?php echo $data->id_periode ?>">
+                                        <?php echo $data->tahun ?> </option>
+                                <?php }
                                 ?>
                             </select>
                         </div>

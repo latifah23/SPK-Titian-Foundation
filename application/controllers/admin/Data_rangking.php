@@ -58,6 +58,7 @@ class Data_rangking extends CI_Controller
             $data = $this->hitung_model->hitung($tahun);
             $ket = 'Data Siswa periode ' . $thn;
         }
+<<<<<<< HEAD
         // $sis  = $this->titian_model->get_where_data($where, 'siswa')->result();
         // foreach ($sis as $s) {            
             // if ($data['siswa']>1) {
@@ -72,6 +73,16 @@ class Data_rangking extends CI_Controller
             //     redirect(base_url('admin/data_nilai_alternatif'));
             // }
         // }
+=======
+        $data['ket'] = $ket;
+        $data['thn'] = $thn;
+        $data['id_thn'] = $tahun;
+        $data['option_tahun'] = $this->titian_model->get_data('periode')->result();
+        $this->load->view('template/header');
+        $this->load->view('template/sidebar');
+        $this->load->view('rank/data_rank', $data);
+        $this->load->view('template/footer');
+>>>>>>> 2a69229089e583c2b7cbf6538e8a05ec7e7223af
     }
 
     public function keputusan()
@@ -103,6 +114,7 @@ class Data_rangking extends CI_Controller
         $data['thn'] = $thn;
         $data['url_cetak'] = base_url($url_cetak);
         $data['transaksi'] = $transaksi;
+        $data['id_thn'] = $tahun;
         $data['option_tahun'] = $this->titian_model->get_data('periode')->result();
         $this->load->view('template/header');
         $this->load->view('template/sidebar');
@@ -111,7 +123,7 @@ class Data_rangking extends CI_Controller
     }
     public function cetak()
     {
-        if (isset($_GET['tahun']) && !empty($_GET['tahun'])) { // Cek apakah user telah memilih filter dan klik tombol tampilkan
+        if (isset($_GET['tahun']) && !empty($_GET['tahun'])) {
             $tahun = $_GET['tahun'];
             $data = $this->hitung_model->hitung($tahun);
             $where = array('id_periode ' => $tahun);
@@ -137,7 +149,7 @@ class Data_rangking extends CI_Controller
         $data['gen'] = $gen;
         $w = array('periode.id_periode ' => $tahun);
         $data['nama'] = $this->titian_model->joinNilaiAlternatifWhere($w);
-        $data['kriteria']    = $this->titian_model->get_data('kriteria')->result();        
+        $data['kriteria']    = $this->titian_model->get_data('kriteria')->result();
         $this->load->view('rank/print', $data);
     }
     public function insert()
@@ -158,7 +170,7 @@ class Data_rangking extends CI_Controller
                 </div>'
             );
             redirect('admin/data_rangking/keputusan');
-        }           
+        }
         foreach ($id_rank as $key => $value) {
             $data = array(
                 "keputusan"         => $id_rank[$key],
@@ -167,24 +179,45 @@ class Data_rangking extends CI_Controller
                 "keputusan"         => $_POST['keputusan'][$key],
                 'tanggal'           => date('Y-m-d H:i:s'),
             );
+<<<<<<< HEAD
             echo json_encode($data);
             $this->titian_model->insert_data($data, 'keputusan');
+=======
+            $this->titian_model->insert_data($data, 'rangking');
+>>>>>>> 2a69229089e583c2b7cbf6538e8a05ec7e7223af
         }
         redirect('admin/data_rangking/keputusan');
     }
     public function update()
     {
+        $tahun = $_POST['tahun'];
         $id_rank    = $this->input->post('id_rank');
+        if(!$id_rank){
+            $this->session->set_flashdata(
+                'pesan',
+                '<div class="alert alert-danger alert-dismissible show fade">
+                <div class="alert-body">
+                <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+                </button>
+                Data keputusan belum di simpan!
+                </div>
+                </div>'
+            );            
+            redirect('admin/data_rangking/keputusan?tahun=' . $tahun);
+        }
         $datar = array();
         foreach ($id_rank as $key => $value) {
             $datar[] = array(
+<<<<<<< HEAD
                 "id_keputusan"          => $id_rank[$key],
                 // "nama_siswa"        => $_POST['id_siswa'][$key],
                 // "nilai"             => $_POST['nilai'][$key],
+=======
+                "id_rangking"          => $id_rank[$key],
+>>>>>>> 2a69229089e583c2b7cbf6538e8a05ec7e7223af
                 "keputusan"         => $_POST['keputusan'][$key],
-                // 'tanggal'           => date('Y-m-d H:i:s'),
             );
-            // $this->titian_model->insert_data($data, 'rangking');
         }
         $this->db->update_batch('keputusan', $datar, 'id_keputusan');
         $this->session->set_flashdata(
@@ -198,7 +231,7 @@ class Data_rangking extends CI_Controller
                 </div>
                 </div>'
         );
-        redirect('admin/data_rangking/keputusan');
+        redirect('admin/data_rangking/keputusan?tahun=' . $tahun);
     }
     public function delete($id)
     {

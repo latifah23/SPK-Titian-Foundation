@@ -37,7 +37,7 @@ class Login extends CI_Controller
                 <button class="close" data-dismiss="alert">
                 <span>&times;</span>
                 </button>
-                Maaf akun anda sudah tidak aktif, silahkan hubingi admin
+                Maaf akun anda sudah tidak aktif, silahkan hubungi admin
                 </div>
                 </div>'
 			);

@@ -6,7 +6,7 @@
                 <tr>
                     <td style="text-align:center">
                         <h3>LAPORAN EVALUASI TAHUNAN GENERASI <?= $gen ?></h3>
-                        <h3>PERIODE <?= $thn ?></h3>                                                
+                        <h3>PERIODE <?= $thn ?></h3>
                     </td>
                 </tr>
                 <tr>
@@ -37,15 +37,36 @@
                                             <td><?php echo $value->nama ?></td>
                                             <td><?php echo $value->asal_sekolah ?></td>
                                             <td><?php echo $value->tahun ?></td>
-                                            <?php foreach ($nilai_alternatif as $key => $value2) { ?>
+                                            <?php foreach ($nilai_alternatif as $value2) { ?>
                                                 <td><?php echo $value2->nilai ?></td>
                                             <?php } ?>
+<<<<<<< HEAD
                                             <?php
                                             $where = array('id_siswa ' => $value->id_siswa);
                                             $x  = $this->titian_model->get_where_data($where, 'keputusan')->result();
                                             foreach ($x as $data) {
                                                 echo "<td>" . $data->nilai . "</td>";
                                                 echo "<td>" . $data->keputusan . "</td>";
+=======
+                                            <td>
+                                                <?php
+                                                $op = 1;
+                                                if (!empty($rcdx)) {
+                                                    arsort($rcdx);
+                                                    echo number_format($rcdx[$value->id_siswa], 2);
+                                                }
+                                                ?>
+                                            </td>
+                                            <?php $where = array('id_siswa ' => $value->id_siswa);
+                                            $x  = $this->titian_model->get_where_data($where, 'rangking')->result();
+                                            if (!empty($x)) {
+                                                foreach ($x as $data) {
+                                                    // echo "<td>" . $data->nilai . "</td>";
+                                                    echo "<td>" . $data->keputusan . "</td>";
+                                                }
+                                            } else {
+                                                echo "<td> !!! <b>Belum di isi</b> !!!</td>";
+>>>>>>> 2a69229089e583c2b7cbf6538e8a05ec7e7223af
                                             }
                                             ?>
                                         </tr>
