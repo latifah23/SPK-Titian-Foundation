@@ -1,7 +1,7 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Update Data Admin</h1>
+            <h1>Edit Data Admin</h1>
         </div>
 
         <div class="card">
@@ -10,22 +10,6 @@
                 <form method="POST" action="<?php echo base_url('admin/data_admin/update_admin_aksi')?>"enctype="multipart/form-data">
                 <div class="class row">
                     <div class="col-md-6">
-                        <input type="text" name="id_admin" value="<?= $ad->id_admin?>" hidden>
-                        <div class="form-group">
-                            <label>Nama Admin</label>
-                            <input type="text" name="nama" class="form-control" value="<?php echo $ad->nama?>">
-                            <?php echo form_error('nama','<div class="text-small text-danger">','</div>')?>
-                        </div>
-                        <div class="form-group">
-                            <label>Username Admin</label>
-                            <input type="text" name="username" class="form-control" value="<?php echo $ad->username?>">
-                            <?php echo form_error('username','<div class="text-small text-danger">','</div>')?>
-                        </div>
-                        <div class="form-group">
-                            <label>Password Admin</label>
-                            <input type="password" name="password" class="form-control"value="<?php echo $ad->password?>">
-                            <?php echo form_error('password','<div class="text-small text-danger">','</div>')?>
-                        </div>
                         <div class="form-group">
                             <label>Status Admin</label>
                             <select name="status" class="form-control" type="text"> value="<?php echo $ad->status?>">

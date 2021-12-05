@@ -44,8 +44,9 @@
                                             <label id="">
                                                 <input type="text" name="id_kriteria[]" value="<?= $value->id_kriteria; ?>" hidden>
                                             </label>
-                                            <input type="range" name="nilai[]" value="1" min="1" max="<?php echo $value->bobot ?>" oninput="this.nextElementSibling.value = this.value" step=".1">
-                                            <output>1</output>
+                                            <!-- <input type="range" name="nilai[]" value="1" min="1" max="<?php echo $value->bobot ?>" oninput="this.nextElementSibling.value = this.value" step=".1"> -->
+                                            <!-- <output>1</output> -->
+                                            <input type="number" name="nilai[]" value="<?php echo $value->bobot ?>" min="1" max="<?php echo $value->bobot ?>" oninput="this.nextElementSibling.value = this.value" step=".1">
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

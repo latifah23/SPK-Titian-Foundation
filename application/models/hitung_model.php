@@ -39,14 +39,19 @@ class hitung_model extends CI_model
                         if ($nilailama->id_kriteria == $cektest) {
                             $akar[$o][$cektest] = pow($nilailama->nilai, 2);
                             $nilai_baru[] = $nilailama->nilai;
+                            //echo json_encode($nilailama->nilai);
+                            //echo json_encode($nilai_baru);
+                            // echo '<pre> $nilai_baru = ' . json_encode($nilai_baru) . '<pre><br>';
                         }
                     }
                 }
+                //echo '<pre> $akar[$o][$cektest] = ' . json_encode($akar[$o][$cektest] ) . '<pre><br>';
+
                 $nilaialternatif[] = array('no' => $o, 'nama' => $sis->nama, 'nilai' => $nilai_baru);
                 $o++;
             }
             $nilai_alter = $this->db->get('nilai_alternatif')->result();
-            // echo '<pre> Kriteria = ' . json_encode($kriteria) . '<pre><br>';
+            //echo '<pre> Kriteria = ' . json_encode($kriteria) . '<pre><br>';
             // echo '<pre> nilai_alter = ' . json_encode($nilai_alter) . '<pre><br>';
             // echo '<pre> NILAI ALTERNATIF(nilai_alter digabung) = ' . json_encode($nilaialternatif) . '</pre>';
             #END OF TABEL NILAI ALTERNATIF
@@ -197,13 +202,27 @@ class hitung_model extends CI_model
             $oip = 0;
             $jaridl = array();
             foreach ($siswa as $key2) {
-
-                $rc = $snegatif[$oip] / ($spositif[$oip] + $snegatif[$oip]);
-                $rcd[$key2->nama] = $rc;
-                $rcdx[$key2->id_siswa] = $rc;
-                $jaridl[] = array('no' => $o, 'nama' => $key2->nama, 'jarakpositif' => $spositif[$oip], 'jaraknegatif' => $snegatif[$oip], 'rc' => $rc);
-                $o++;
-                $oip++;
+                if ($snegatif[$oip]>0 || $spositif[$oip]>0) {
+                    $rc = $snegatif[$oip] / ($spositif[$oip] + $snegatif[$oip]);
+                    $rcd[$key2->nama] = $rc;
+                    $rcdx[$key2->id_siswa] = $rc;
+                    $jaridl[] = array('no' => $o, 'nama' => $key2->nama, 'jarakpositif' => $spositif[$oip], 'jaraknegatif' => $snegatif[$oip], 'rc' => $rc);
+                    $o++;
+                    $oip++;
+                }else{
+                    $this->session->set_flashdata(
+                        'pesan',
+                        '<div class="alert alert-success alert-dismissible show fade">
+                        <div class="alert-body">
+                        <button class="close" data-dismiss="alert">
+                        <span>&times;</span>
+                        </button>
+                        Data Siswa harus lebih dari satu!
+                        </div>
+                        </div>'
+                    );                    
+                    redirect(base_url('admin/data_nilai_alternatif'));
+                }
             }
             // echo '<pre> Jarak Ideal Positif(D+) = ' . json_encode($spositif) . '</pre>';
             // echo '<pre> Jarak Ideal Negatif(D-) = ' . json_encode($snegatif) . '</pre>';

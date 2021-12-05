@@ -1,7 +1,7 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Tambah Nilai</h1>
+            <h1>Edit Nilai</h1>
         </div>
         <div class="card">
             <div class="card-body">
@@ -56,8 +56,9 @@
                                                 <input type="text" name="id_kriteria[]" value="<?= $value->id_kriteria; ?>" hidden>
                                             </label>
                                             <input type="hidden" name="id_nilai[]" value="<?php echo $nilai[$key]->id_nilai ?>">
-                                            <input type="range" name="nilai[]" value="<?php echo $nilai[$key]->nilai ?>" min="1" max="<?php echo $value->bobot ?>" oninput="this.nextElementSibling.value = this.value" step=".1">
-                                            <output><?php echo $nilai[$key]->nilai ?></output>
+                                            <!-- <input type="range" name="nilai[]" value="<?php echo $nilai[$key]->nilai ?>" min="1" max="<?php echo $value->bobot ?>" oninput="this.nextElementSibling.value = this.value" step=".1"> -->
+                                            <!-- <output><?php echo $nilai[$key]->nilai ?></output> -->
+                                            <input type="number" name="nilai[]" value="<?php echo $nilai[$key]->nilai ?>" min="1" max="<?php echo $value->bobot ?>" oninput="this.nextElementSibling.value = this.value" step=".1">
 
                                         </td>
                                     </tr>

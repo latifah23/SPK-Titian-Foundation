@@ -8,8 +8,8 @@
             <div class="d-flex">
                 <form method="GET" action="">
                     <div class="p-2">
-                        <h5>Hasil keputusan</h5>
-                        <h6>Filter Berdasarkan <?php echo $ket; ?></h6>
+                        <!-- <h5>Hasil keputusan</h5> -->
+                        <h6>Filter Berdasarkan tahun : <?php echo $ket; ?></h6>
                         <select name="tahun" class="form-control">
                             <?php
                             echo '<option value=""> --- ' . $thn . ' --- </option>';
@@ -130,8 +130,8 @@
                                                 <?php echo $value->tanggal ?>
                                             </td>
                                             <td>
-                                                <?php echo $value->rangking ?>
-                                                <input type="hidden" name="id_rank[]" value="<?php echo $value->id_rangking; ?>">
+                                                <?php echo $value->keputusan ?>
+                                                <input type="hidden" name="id_rank[]" value="<?php echo $value->id_keputusan; ?>">
                                             </td>
                                             <td>
                                                 <?php echo $value->nama_siswa ?>
@@ -161,7 +161,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <a href="<?php echo base_url('admin/data_rangking/delete/') . $value->id_rangking ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                                                <a href="<?php echo base_url('admin/data_keputusan/delete/') . $value->id_keputusan ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
                                             </td>
                                         </tr>
                                 <?php }

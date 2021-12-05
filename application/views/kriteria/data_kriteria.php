@@ -13,7 +13,7 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Kode</th>
+                        <!-- <th>Kode</th> -->
                         <th>Nama Kriteria</th>
                         <th>Atribut</th>
                         <th>Bobot</th>
@@ -26,7 +26,7 @@
                     foreach($kriteria as $kr) : ?>
                     <tr>
                         <td><?php echo $no++ ?></td>
-                        <td><?php echo $kr->id_kriteria ?></td>
+                        <!-- <td><?php echo $kr->id_kriteria ?></td> -->
                         <td><?php echo $kr->nama_kriteria ?></td>
                         <td><?php echo $kr->atribut ?></td>
                         <td><?php echo $kr->bobot ?></td>

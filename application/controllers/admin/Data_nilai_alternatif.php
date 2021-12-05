@@ -60,7 +60,8 @@ class Data_nilai_alternatif extends CI_Controller
 
     public function add_nilai_aksi()
     {
-        $cek = $this->db->get_where('siswa', array('asal_sekolah' => $this->input->post('asal_sekolah')));
+        // $cek = $this->db->get_where('siswa', array('siswa' => $this->input->post('siswa')) || array('id_periode' => $this->input->post('id_periode')));
+        $cek = $this->db->get_where('siswa', array('nama' => $this->input->post('nama'), 'id_periode' => $this->input->post('id_periode')));
         if ($cek->num_rows() != 0) {
             $this->session->set_flashdata(
                 'pesan',

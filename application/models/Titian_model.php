@@ -81,21 +81,21 @@ class Titian_model extends CI_model
   public function view_by_year($year)
   {
     $this->db->select('*, siswa.nama as nama_siswa');
-    $this->db->from('rangking');
-    $this->db->join('siswa', 'siswa.id_siswa = rangking.id_siswa');
+    $this->db->from('keputusan');
+    $this->db->join('siswa', 'siswa.id_siswa = keputusan.id_siswa');
     $this->db->where('siswa.id_periode', $year); // Tambahkan where tahun
 
-    return $this->db->get(); // Tampilkan data rangking sesuai tahun yang diinput oleh user pada filter
+    return $this->db->get(); // Tampilkan data keputusan sesuai tahun yang diinput oleh user pada filter
   }
 
   public function option_tahun()
   {
     $this->db->select('YEAR(tanggal) AS tahun'); // Ambil Tahun dari field tanggal
-    $this->db->from('rangking'); // select ke tabel rangking
+    $this->db->from('keputusan'); // select ke tabel keputusan
     $this->db->order_by('YEAR(tanggal)'); // Urutkan berdasarkan tahun secara Ascending (ASC)
     $this->db->group_by('YEAR(tanggal)'); // Group berdasarkan tahun pada field tanggal
 
-    return $this->db->get()->result(); // Ambil data pada tabel rangking sesuai kondisi diatas
+    return $this->db->get()->result(); // Ambil data pada tabel keputusan sesuai kondisi diatas
   }
 
   function joinNilaiAlternatif()

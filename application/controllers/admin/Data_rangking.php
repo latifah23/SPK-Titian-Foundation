@@ -58,13 +58,20 @@ class Data_rangking extends CI_Controller
             $data = $this->hitung_model->hitung($tahun);
             $ket = 'Data Siswa periode ' . $thn;
         }
-        $data['ket'] = $ket;
-        $data['thn'] = $thn;
-        $data['option_tahun'] = $this->titian_model->get_data('periode')->result();
-        $this->load->view('template/header');
-        $this->load->view('template/sidebar');
-        $this->load->view('rank/data_rank', $data);
-        $this->load->view('template/footer');
+        // $sis  = $this->titian_model->get_where_data($where, 'siswa')->result();
+        // foreach ($sis as $s) {            
+            // if ($data['siswa']>1) {
+                $data['ket'] = $ket;
+                $data['thn'] = $thn;
+                $data['option_tahun'] = $this->titian_model->get_data('periode')->result();
+                $this->load->view('template/header');
+                $this->load->view('template/sidebar');
+                $this->load->view('rank/data_rank', $data);
+                $this->load->view('template/footer');
+            // }else{
+            //     redirect(base_url('admin/data_nilai_alternatif'));
+            // }
+        // }
     }
 
     public function keputusan()
@@ -137,7 +144,7 @@ class Data_rangking extends CI_Controller
     {
         $id_rank    = $this->input->post('id_rank');
         $id_siswa    = $this->input->post('id_siswa');
-        $cek = $this->db->get_where('rangking', array('id_siswa' => $id_siswa[0]));
+        $cek = $this->db->get_where('keputusan', array('id_siswa' => $id_siswa[0]));
         if ($cek->num_rows() != 0) {
             $this->session->set_flashdata(
                 'pesan',
@@ -154,14 +161,14 @@ class Data_rangking extends CI_Controller
         }           
         foreach ($id_rank as $key => $value) {
             $data = array(
-                "rangking"          => $id_rank[$key],
+                "keputusan"         => $id_rank[$key],
                 "id_siswa"          => $_POST['id_siswa'][$key],
                 "nilai"             => $_POST['nilai'][$key],
                 "keputusan"         => $_POST['keputusan'][$key],
                 'tanggal'           => date('Y-m-d H:i:s'),
             );
             echo json_encode($data);
-            $this->titian_model->insert_data($data, 'rangking');
+            $this->titian_model->insert_data($data, 'keputusan');
         }
         redirect('admin/data_rangking/keputusan');
     }
@@ -171,7 +178,7 @@ class Data_rangking extends CI_Controller
         $datar = array();
         foreach ($id_rank as $key => $value) {
             $datar[] = array(
-                "id_rangking"          => $id_rank[$key],
+                "id_keputusan"          => $id_rank[$key],
                 // "nama_siswa"        => $_POST['id_siswa'][$key],
                 // "nilai"             => $_POST['nilai'][$key],
                 "keputusan"         => $_POST['keputusan'][$key],
@@ -179,7 +186,7 @@ class Data_rangking extends CI_Controller
             );
             // $this->titian_model->insert_data($data, 'rangking');
         }
-        $this->db->update_batch('rangking', $datar, 'id_rangking');
+        $this->db->update_batch('keputusan', $datar, 'id_keputusan');
         $this->session->set_flashdata(
             'pesan',
             '<div class="alert alert-warning alert-dismissible show fade">
@@ -195,8 +202,8 @@ class Data_rangking extends CI_Controller
     }
     public function delete($id)
     {
-        $where = array('id_rangking' => $id);
-        $this->titian_model->delete_data($where, 'rangking');
+        $where = array('id_keputusan' => $id);
+        $this->titian_model->delete_data($where, 'keputusan');
         $this->session->set_flashdata(
             'pesan',
             '<div class="alert alert-danger alert-dismissible show fade">

@@ -1,7 +1,7 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Update Data Siswa</h1>
+            <h1>Edit Siswa</h1>
         </div>
 
         <div class="card">

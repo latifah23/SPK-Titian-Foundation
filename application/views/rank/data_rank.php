@@ -9,8 +9,8 @@
                 <div class="d-flex">
                     <form method="GET" action="">
                         <div class="p-2">
-                            <h5>Hasil Rangking</h5>
-                            <h6>Filter Siswa berdasarkan tahun : </h6>
+                            <!-- <h5>Hasil Rangking</h5> -->
+                            <h6>Filter siswa berdasarkan tahun : </h6>
                             <select name="tahun" class="form-control">
                                 <?php
                                 echo '<option value=""> --- ' . $thn. ' --- </option>';
@@ -288,7 +288,7 @@
                                     <th>Rangking</th>
                                     <th>Nama Siswa</th>
                                     <th>Asal Sekolah</th>
-                                    <th>Nilai Ci</th>
+                                    <th>Nilai Total</th>
                                 </tr>
                             </thead>
                             <tbody>

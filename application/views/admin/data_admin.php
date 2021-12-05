@@ -4,7 +4,7 @@
             <h1>Data Admin</h1>
         </div>
 
-        <a href="<?php echo base_url ('admin/data_admin/add_admin')?>" class="btn btn-primary mb-3">Tambah Data</a>
+        <!-- <a href="<?php echo base_url ('admin/data_admin/add_admin')?>" class="btn btn-primary mb-3">Tambah Data</a> -->
         
         <?php echo $this->session->flashdata('pesan')?>
 

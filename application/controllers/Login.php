@@ -26,6 +26,7 @@ class Login extends CI_Controller
 			'level' => $level,
 			'password' => md5($password)
 		);
+		//cek status admin aktif/ tidak aktif
 		$cek = $this->m_login->cek_login("admin", $where)->num_rows();
 		$data = $this->db->query("SELECT status FROM admin WHERE username = '$username'")->row_array();
 		if ($data['status'] == "0") {
@@ -42,7 +43,6 @@ class Login extends CI_Controller
 			);
 			redirect(base_url('login'));
 		}
-
 		if ($level == 'admin') {
 			if ($cek > 0) {
 

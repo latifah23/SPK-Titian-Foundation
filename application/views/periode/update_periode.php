@@ -1,7 +1,7 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Update Data Periode</h1>
+            <h1>Edit Periode</h1>
         </div>
 
         <div class="card">
@@ -10,11 +10,11 @@
                     <form method="POST" action="<?php echo base_url('admin/data_periode/update_periode_aksi') ?>" enctype="multipart/form-data">
                         <div class="class row">
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label>Kode</label>
                                     <input type="text" name="id_periode" class="form-control" value="<?= $pr->id_periode ?>" readonly>
                                     <?php echo form_error('kode', '<div class="text-small text-danger">', '</div>') ?>
-                                </div>
+                                </div> -->
                                 <div class="form-group">
                                     <label>Generasi</label>
                                     <input type="text" name="generasi" class="form-control" value="<?php echo $pr->generasi ?>">

@@ -42,7 +42,7 @@
                                             <?php } ?>
                                             <?php
                                             $where = array('id_siswa ' => $value->id_siswa);
-                                            $x  = $this->titian_model->get_where_data($where, 'rangking')->result();
+                                            $x  = $this->titian_model->get_where_data($where, 'keputusan')->result();
                                             foreach ($x as $data) {
                                                 echo "<td>" . $data->nilai . "</td>";
                                                 echo "<td>" . $data->keputusan . "</td>";

@@ -13,7 +13,7 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Kode</th>
+                        <!-- <th>Kode</th> -->
                         <th>Generasi</th>
                         <th>Tahun Angkatan</th>
                         <th>Aksi</th>
@@ -25,7 +25,7 @@
                     foreach($periode as $pr) : ?>
                     <tr>
                         <td><?php echo $no++ ?></td>
-                        <td><?php echo $pr->id_periode ?></td>
+                        <!-- <td><?php echo $pr->id_periode ?></td> -->
                         <td><?php echo $pr->generasi ?></td>
                         <td><?php echo $pr->tahun ?></td>
                         <td>
